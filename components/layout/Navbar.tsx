@@ -3,34 +3,27 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Sparkles, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/providers/ThemeProvider";
-
-const links = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
-  { name: "Gallery", href: "/gallery" },
-  { name: "Contact", href: "/contact" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageSwitcher } from "@/components/shared/LanguageSwitcher";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
+  const { t } = useLanguage();
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+  const links = [
+    { name: t.nav.home, href: "/" },
+    { name: t.nav.about, href: "/about" },
+    { name: t.nav.services, href: "/services" },
+    { name: t.nav.gallery, href: "/gallery" },
+    { name: t.nav.contact, href: "/contact" },
+  ];
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -41,22 +34,25 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-xl shadow-sm border-b"
-          : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 border-b bg-background/95 shadow-sm backdrop-blur-xl"
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-6">
-        <Link href="/" className="group flex items-center gap-2">
+      <div className="container mx-auto flex h-20 items-center justify-between px-6">
+        <Link href="/" className="group flex items-center gap-3">
           <motion.div
-            whileHover={{ rotate: 180 }}
+            whileHover={{ rotate: 360 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground"
+            className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden"
           >
-            <Sparkles className="h-5 w-5" />
+            <Image
+              src="/images/logo.png"
+              alt="BTD Trading PLC Logo"
+              width={96}
+              height={96}
+              className="h-14 w-14 object-contain"
+            />
           </motion.div>
-          <span className="text-lg font-bold tracking-tight transition-colors group-hover:text-primary">
+
+          <span className="text-xl font-bold tracking-tight transition-colors group-hover:text-primary">
             BTD Trading PLC
           </span>
         </Link>
@@ -68,11 +64,10 @@ export function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                  isActive
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+                className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${isActive
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+                  }`}
               >
                 {link.name}
                 {isActive && (
@@ -101,14 +96,18 @@ export function Navbar() {
             )}
           </motion.button>
 
+          <LanguageSwitcher />
+
           <Link href="/contact">
             <Button size="sm" className="rounded-full px-6">
-              Get a Quote
+              {t.nav.getQuote}
             </Button>
           </Link>
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
+          <LanguageSwitcher />
+
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -164,11 +163,10 @@ export function Navbar() {
                       <Link
                         href={link.href}
                         onClick={() => setIsOpen(false)}
-                        className={`block rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
-                          isActive
-                            ? "bg-primary/10 text-primary"
-                            : "text-muted-foreground hover:bg-muted"
-                        }`}
+                        className={`block rounded-xl px-4 py-3 text-sm font-medium transition-colors ${isActive
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground hover:bg-muted"
+                          }`}
                       >
                         {link.name}
                       </Link>
@@ -183,7 +181,7 @@ export function Navbar() {
                 >
                   <Link href="/contact" onClick={() => setIsOpen(false)}>
                     <Button className="mt-4 w-full rounded-xl">
-                      Get a Quote
+                      {t.nav.getQuote}
                     </Button>
                   </Link>
                 </motion.div>

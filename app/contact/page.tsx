@@ -7,39 +7,41 @@ import { Footer } from "@/components/layout/Footer";
 import { Container } from "@/components/shared/Container";
 import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react";
 import ContactForm from "./ContactForm";
-
-const contactInfo = [
-  {
-    icon: MapPin,
-    label: "Address",
-    value: "Addis Ababa, Ethiopia",
-    description: "Visit our office during business hours",
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+251 911 234 567",
-    description: "Mon-Fri from 8am to 6pm",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: "info@btdtrading.com",
-    description: "We'll respond within 24 hours",
-  },
-  {
-    icon: Clock,
-    label: "Business Hours",
-    value: "Mon - Sat: 8:00 AM - 6:00 PM",
-    description: "Emergency services available",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ContactPage() {
+  const { t } = useLanguage();
+
+  const contactInfo = [
+    {
+      icon: MapPin,
+      label: t.contact.address,
+      value: t.contact.addressValue,
+      description: t.contact.addressDesc,
+    },
+    {
+      icon: Phone,
+      label: t.contact.phone,
+      value: t.contact.phoneValue,
+      description: t.contact.phoneDesc,
+    },
+    {
+      icon: Mail,
+      label: t.contact.email,
+      value: t.contact.emailValue,
+      description: t.contact.emailDesc,
+    },
+    {
+      icon: Clock,
+      label: t.contact.hours,
+      value: t.contact.hoursValue,
+      description: t.contact.hoursDesc,
+    },
+  ];
   return (
     <>
       <Navbar />
-      <main className="pt-16">
+      <main className="pt-20">
         {/* Hero */}
         <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-primary/5 py-16 sm:py-24">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
@@ -52,14 +54,13 @@ export default function ContactPage() {
               className="mx-auto max-w-3xl text-center"
             >
               <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-                Get in Touch
+                {t.contact.badge}
               </span>
               <h1 className="mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
-                Contact Us
+                {t.contact.title}
               </h1>
               <p className="mt-4 text-base sm:text-lg text-muted-foreground">
-                Ready to transform your space? Let&apos;s discuss your cleaning
-                needs.
+                {t.contact.description}
               </p>
             </motion.div>
           </Container>
@@ -75,11 +76,9 @@ export default function ContactPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <h2 className="text-2xl sm:text-3xl font-bold">Let&apos;s Connect</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold">{t.contact.letsConnect}</h2>
                 <p className="mt-4 text-muted-foreground">
-                  Have questions about our services? Need a free quote?
-                  We&apos;re here to help. Reach out through any of the channels
-                  below.
+                  {t.contact.connectDesc}
                 </p>
 
                 <div className="mt-8 space-y-4 sm:space-y-6">
@@ -123,37 +122,40 @@ export default function ContactPage() {
 
         {/* Map placeholder */}
         <section className="py-16 sm:py-20">
-          <Container>
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="mb-8 text-center">
-                <h2 className="text-2xl sm:text-3xl font-bold">Visit Our Office</h2>
-                <p className="mt-2 text-muted-foreground">
-                  You can find us at Alemenesh Plaza, Bole Medhanialem, Addis
-                  Ababa.
-                </p>
-              </div>
+  <Container>
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      <div className="mb-8 text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold">
+          Visit Our Office
+        </h2>
 
-              <div className="overflow-hidden rounded-2xl border shadow-sm">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.378473899303!2d38.784367380452025!3d8.997987529640856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85e9d21532d1%3A0xaa03ce0d1a2ec63d!2sAlemenesh%20Plaza%20%7C%20Bole%20Medhanialem%20%7C!5e1!3m2!1sen!2set!4v1784045373328!5m2!1sen!2set"
-                  width="100%"
-                  height="350"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  title="BTD Trading PLC Location"
-                  className="h-[250px] sm:h-[350px] md:h-[450px]"
-                />
-              </div>
-            </motion.div>
-          </Container>
-        </section>
+        <p className="mt-2 text-muted-foreground">
+          BTD Trading PLC - Addis Ababa, Ethiopia / Megenagna / Amecha
+        </p>
+      </div>
+
+      <div className="overflow-hidden rounded-2xl border shadow-sm">
+        <iframe
+          src="https://www.google.com/maps?q=9.016333,38.805167&t=k&z=18&output=embed"
+          width="100%"
+          height="350"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="strict-origin-when-cross-origin"
+          title="BTD Trading PLC - Satellite View"
+          className="h-[250px] sm:h-[350px] md:h-[450px]"
+        />
+      </div>
+    </motion.div>
+  </Container>
+</section>
+
       </main>
       <Footer />
     </>

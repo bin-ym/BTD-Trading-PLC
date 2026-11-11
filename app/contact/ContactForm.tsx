@@ -7,8 +7,10 @@ import {
     CheckCircle2,
     ArrowRight,
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ContactForm() {
+    const { t } = useLanguage();
     const [formState, setFormState] = useState({
         name: "",
         email: "",
@@ -23,7 +25,6 @@ export default function ContactForm() {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate form submission
         setTimeout(() => {
             setIsSubmitting(false);
             setIsSubmitted(true);
@@ -37,15 +38,15 @@ export default function ContactForm() {
                     <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
                         <CheckCircle2 className="h-10 w-10 text-green-600" />
                     </div>
-                    <h2 className="text-2xl font-bold">Message Sent!</h2>
+                    <h2 className="text-2xl font-bold">{t.contact.messageSent}</h2>
                     <p className="mt-4 text-muted-foreground">
-                        Thank you for contacting us. We'll get back to you within 24 hours.
+                        {t.contact.thankYou}
                     </p>
                     <Link
                         href="/"
                         className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground"
                     >
-                        Back to Home
+                        {t.contact.backHome}
                         <ArrowRight className="h-4 w-4" />
                     </Link>
                 </div>
@@ -55,9 +56,9 @@ export default function ContactForm() {
 
     return (
         <div className="rounded-3xl border bg-card p-8 shadow-lg">
-            <h2 className="text-2xl font-bold">Send Us a Message</h2>
+            <h2 className="text-2xl font-bold">{t.contact.sendMessage}</h2>
             <p className="mt-2 text-muted-foreground">
-                Fill out the form below and we&apos;ll get back to you soon.
+                {t.contact.formDesc}
             </p>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-5">
@@ -67,7 +68,7 @@ export default function ContactForm() {
                             htmlFor="name"
                             className="mb-2 block text-sm font-medium"
                         >
-                            Full Name *
+                            {t.contact.fullName} *
                         </label>
                         <input
                             id="name"
@@ -86,7 +87,7 @@ export default function ContactForm() {
                             htmlFor="email"
                             className="mb-2 block text-sm font-medium"
                         >
-                            Email Address *
+                            {t.contact.emailAddress} *
                         </label>
                         <input
                             id="email"
@@ -108,7 +109,7 @@ export default function ContactForm() {
                             htmlFor="phone"
                             className="mb-2 block text-sm font-medium"
                         >
-                            Phone Number
+                            {t.contact.phoneNumber}
                         </label>
                         <input
                             id="phone"
@@ -126,7 +127,7 @@ export default function ContactForm() {
                             htmlFor="service"
                             className="mb-2 block text-sm font-medium"
                         >
-                            Service Interested In
+                            {t.contact.serviceInterested}
                         </label>
                         <select
                             id="service"
@@ -136,11 +137,11 @@ export default function ContactForm() {
                             }
                             className="w-full rounded-xl border bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                         >
-                            <option value="">Select a service</option>
-                            <option value="office">Office Cleaning</option>
-                            <option value="building">Building Cleaning</option>
-                            <option value="commercial">Commercial Cleaning</option>
-                            <option value="hospital">Hospital Cleaning</option>
+                            <option value="">{t.contact.selectService}</option>
+                            <option value="office">{t.services.office}</option>
+                            <option value="building">{t.services.building}</option>
+                            <option value="commercial">{t.services.commercial}</option>
+                            <option value="hospital">{t.services.hospital}</option>
                             <option value="other">Other</option>
                         </select>
                     </div>
@@ -151,7 +152,7 @@ export default function ContactForm() {
                         htmlFor="message"
                         className="mb-2 block text-sm font-medium"
                     >
-                        Message *
+                        {t.contact.message} *
                     </label>
                     <textarea
                         id="message"
@@ -162,7 +163,7 @@ export default function ContactForm() {
                             setFormState({ ...formState, message: e.target.value })
                         }
                         className="w-full rounded-xl border bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                        placeholder="Tell us about your cleaning needs..."
+                        placeholder={t.contact.messagePlaceholder}
                     />
                 </div>
 
@@ -193,11 +194,11 @@ export default function ContactForm() {
                                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                                 />
                             </svg>
-                            Sending...
+                            {t.contact.sending}
                         </>
                     ) : (
                         <>
-                            Send Message
+                            {t.contact.send}
                             <Send className="h-4 w-4" />
                         </>
                     )}
