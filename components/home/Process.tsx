@@ -8,33 +8,35 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
-
-const steps = [
-  {
-    icon: Search,
-    title: "Site Inspection",
-    description: "We assess your space and understand your specific cleaning needs.",
-  },
-  {
-    icon: FileText,
-    title: "Free Quotation",
-    description: "Receive a detailed, no-obligation quote tailored to your requirements.",
-  },
-  {
-    icon: Sparkles,
-    title: "Cleaning Service",
-    description: "Our professional team delivers exceptional cleaning results.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Quality Inspection",
-    description: "We verify the results to ensure complete satisfaction.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Process() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
+
+  const steps = [
+    {
+      icon: Search,
+      title: t.process.step1,
+      description: t.process.step1Desc,
+    },
+    {
+      icon: FileText,
+      title: t.process.step2,
+      description: t.process.step2Desc,
+    },
+    {
+      icon: Sparkles,
+      title: t.process.step3,
+      description: t.process.step3Desc,
+    },
+    {
+      icon: CheckCircle2,
+      title: t.process.step4,
+      description: t.process.step4Desc,
+    },
+  ];
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-muted/30 py-16 sm:py-24">
@@ -48,14 +50,13 @@ export function Process() {
           className="mx-auto max-w-3xl text-center"
         >
           <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-            How It Works
+            {t.process.badge}
           </span>
           <h2 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl">
-            Our Simple Process
+            {t.process.title}
           </h2>
           <p className="mt-4 text-base sm:text-lg text-muted-foreground">
-            Getting started is easy. Follow these simple steps to get your space
-            cleaned by professionals
+            {t.process.description}
           </p>
         </motion.div>
 

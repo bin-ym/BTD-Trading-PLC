@@ -4,14 +4,22 @@ import { useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { motion, useInView } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function CTA() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden py-16 sm:py-24">
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary/80" />
+      {/* Subtle Ethiopian flag accent at top */}
+      <div className="absolute top-0 left-0 right-0 h-1 flex">
+        <div className="flex-1 bg-[var(--ethiopian-green)]" />
+        <div className="flex-1 bg-[var(--ethiopian-yellow)]" />
+        <div className="flex-1 bg-[var(--ethiopian-red)]" />
+      </div>
 
       {/* Animated decorative elements */}
       <motion.div
@@ -41,17 +49,16 @@ export function CTA() {
           <div className="mb-6 flex items-center justify-center gap-2">
             <Sparkles className="h-5 w-5 text-white/80" />
             <span className="text-sm font-medium text-white/80">
-              Professional Cleaning Services
+              {t.cta.badge}
             </span>
           </div>
 
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
-            Ready for a Cleaner, Healthier Workplace?
+            {t.cta.title}
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-white/80">
-            Contact BTD Trading PLC today and let our professional team provide
-            the cleaning solution your business deserves. Free quotes available.
+            {t.cta.description}
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -59,7 +66,7 @@ export function CTA() {
               href="/contact"
               className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 sm:px-8 sm:py-4 font-medium text-primary transition-all hover:shadow-xl hover:shadow-white/25"
             >
-              Get a Free Quote
+              {t.cta.getQuote}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
 
@@ -67,7 +74,7 @@ export function CTA() {
               href="/services"
               className="inline-flex items-center gap-2 rounded-full border-2 border-white/30 px-6 py-3 sm:px-8 sm:py-4 font-medium text-white transition-all hover:bg-white/10"
             >
-              Our Services
+              {t.cta.ourServices}
             </Link>
           </div>
         </motion.div>

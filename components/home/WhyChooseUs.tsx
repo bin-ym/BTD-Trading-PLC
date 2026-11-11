@@ -10,48 +10,52 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
-
-const features = [
-  {
-    icon: Users,
-    title: "Experienced Team",
-    description: "Our trained professionals have years of experience in commercial cleaning.",
-  },
-  {
-    icon: Wrench,
-    title: "Modern Equipment",
-    description: "We use state-of-the-art cleaning equipment and techniques.",
-  },
-  {
-    icon: DollarSign,
-    title: "Affordable Pricing",
-    description: "Competitive rates with no hidden fees or surprises.",
-  },
-  {
-    icon: Clock,
-    title: "Reliable Service",
-    description: "On-time arrival and consistent service you can count on.",
-  },
-  {
-    icon: Leaf,
-    title: "Eco-Friendly Products",
-    description: "Safe, environmentally friendly cleaning solutions available.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Quality Assurance",
-    description: "Rigorous quality checks to ensure complete satisfaction.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function WhyChooseUs() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
+
+  const features = [
+    {
+      icon: Users,
+      title: t.whyChooseUs.experiencedTeam,
+      description: t.whyChooseUs.experiencedTeamDesc,
+    },
+    {
+      icon: Wrench,
+      title: t.whyChooseUs.modernEquipment,
+      description: t.whyChooseUs.modernEquipmentDesc,
+    },
+    {
+      icon: DollarSign,
+      title: t.whyChooseUs.affordablePricing,
+      description: t.whyChooseUs.affordablePricingDesc,
+    },
+    {
+      icon: Clock,
+      title: t.whyChooseUs.reliableService,
+      description: t.whyChooseUs.reliableServiceDesc,
+    },
+    {
+      icon: Leaf,
+      title: t.whyChooseUs.ecoFriendly,
+      description: t.whyChooseUs.ecoFriendlyDesc,
+    },
+    {
+      icon: CheckCircle2,
+      title: t.whyChooseUs.qualityAssurance,
+      description: t.whyChooseUs.qualityAssuranceDesc,
+    },
+  ];
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden py-16 sm:py-24">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+      {/* Subtle Ethiopian pattern overlay */}
+      <div className="absolute inset-0 ethiopian-pattern" />
 
       <div className="container relative mx-auto px-6">
         <motion.div
@@ -61,14 +65,13 @@ export function WhyChooseUs() {
           className="mx-auto max-w-3xl text-center"
         >
           <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-            Why Choose BTD Trading
+            {t.whyChooseUs.badge}
           </span>
           <h2 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl">
-            Trusted Cleaning Professionals
+            {t.whyChooseUs.title}
           </h2>
           <p className="mt-4 text-base sm:text-lg text-muted-foreground">
-            We combine expertise, reliability, and attention to detail to deliver
-            exceptional cleaning services
+            {t.whyChooseUs.description}
           </p>
         </motion.div>
 
@@ -93,11 +96,10 @@ export function WhyChooseUs() {
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                className={`group relative overflow-hidden rounded-2xl border bg-card p-6 sm:p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
-                  hoveredIndex === index
-                    ? "border-primary/30 ring-2 ring-primary/20"
-                    : ""
-                }`}
+                className={`group relative overflow-hidden rounded-2xl border bg-card p-6 sm:p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${hoveredIndex === index
+                  ? "border-primary/30 ring-2 ring-primary/20"
+                  : ""
+                  }`}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
