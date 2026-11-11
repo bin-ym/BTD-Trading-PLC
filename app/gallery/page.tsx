@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,101 +9,275 @@ import { Footer } from "@/components/layout/Footer";
 import { Container } from "@/components/shared/Container";
 import { blurPlaceholder } from "@/lib/utils";
 import { Sparkles, ArrowRight, MapPin, Play, X } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const categories = [
-  { id: "all", label: "All Projects" },
-  { id: "cleaning", label: "Cleaning" },
-  { id: "office", label: "Office" },
-  { id: "building", label: "Building" },
-  { id: "commercial", label: "Commercial" },
-  { id: "video", label: "Videos" },
-];
+interface GalleryItem {
+  id: number;
+  type: "image" | "video";
+  category: "cleaning" | "office" | "building" | "commercial" | "video";
+  src: string;
+  title: {
+    en: string;
+    am: string;
+  };
+  location: {
+    en: string;
+    am: string;
+  };
+  description: {
+    en: string;
+    am: string;
+  };
+}
 
-const galleryImages = [
-  "/images/work/work-01.jpg",
-  "/images/work/work-02.jpg",
-  "/images/work/work-03.jpg",
-  "/images/work/work-04.jpg",
-  "/images/work/work-05.jpg",
-  "/images/work/work-06.jpg",
-  "/images/work/work-07.jpg",
-  "/images/work/work-08.jpg",
-  "/images/work/work-09.jpg",
-  "/images/work/work-10.jpg",
-  "/images/work/work-11.jpg",
-  "/images/work/work-12.jpg",
-  "/images/work/work-13.jpg",
-  "/images/work/work-14.jpg",
-  "/images/work/work-15.jpg",
-  "/images/work/work-16.jpg",
-  "/images/work/work-17.jpg",
-  "/images/work/work-18.jpg",
-  "/images/work/work-19.jpg",
-  "/images/work/work-20.jpg",
-  "/images/work/work-21.jpg",
-  "/images/work/work-22.jpg",
-  "/images/work/work-23.jpg",
-  "/images/work/work-24.jpg",
-  "/images/work/work-25.jpg",
-  "/images/work/work-26.jpg",
-  "/images/work/work-27.jpg",
-  "/images/work/work-28.jpg",
-  "/images/work/work-29.jpg",
-  "/images/work/work-30.jpg",
-];
-
-const projects = [
-  { id: 1, title: "Office Cleaning", category: "office", location: "Megenagna, Addis Ababa", description: "Complete office space cleaning and sanitization", imageIndex: 0 },
-  { id: 2, title: "Building Maintenance", category: "building", location: "Bole, Addis Ababa", description: "Exterior and interior building cleaning", imageIndex: 1 },
-  { id: 3, title: "Commercial Cleaning", category: "commercial", location: "Kazanchis, Addis Ababa", description: "Commercial facility deep cleaning", imageIndex: 2 },
-  { id: 4, title: "Office Sanitization", category: "office", location: "Bole Medhanialem", description: "Full office sanitization service", imageIndex: 3 },
-  { id: 5, title: "Building Exterior", category: "building", location: "Addis Ababa", description: "Building facade and window cleaning", imageIndex: 4 },
-  { id: 6, title: "Workspace Cleaning", category: "office", location: "Megenagna", description: "Daily workspace cleaning service", imageIndex: 5 },
-  { id: 7, title: "Facility Cleaning", category: "commercial", location: "Addis Ababa", description: "Complete facility maintenance", imageIndex: 6 },
-  { id: 8, title: "Deep Cleaning", category: "cleaning", location: "Amecha, Addis Ababa", description: "Deep cleaning and sanitization", imageIndex: 7 },
-  { id: 9, title: "Office Maintenance", category: "office", location: "Addis Ababa", description: "Regular office maintenance cleaning", imageIndex: 8 },
-  { id: 10, title: "Building Care", category: "building", location: "Summit, Addis Ababa", description: "Common area and lobby cleaning", imageIndex: 9 },
-  { id: 11, title: "Commercial Space", category: "commercial", location: "Mercato, Addis Ababa", description: "Retail and commercial space cleaning", imageIndex: 10 },
-  { id: 12, title: "Office Hygiene", category: "office", location: "Kazanchis", description: "Office hygiene and sanitization", imageIndex: 11 },
-  { id: 13, title: "Building Detail", category: "building", location: "Bole, Addis Ababa", description: "Detailed building cleaning service", imageIndex: 12 },
-  { id: 14, title: "Sanitization Service", category: "cleaning", location: "Addis Ababa", description: "Professional sanitization service", imageIndex: 13 },
-  { id: 15, title: "Office Deep Clean", category: "office", location: "Megenagna", description: "Thorough office deep cleaning", imageIndex: 14 },
-  { id: 16, title: "Commercial Facility", category: "commercial", location: "Addis Ababa", description: "Large-scale commercial cleaning", imageIndex: 15 },
-  { id: 17, title: "Building Wash", category: "building", location: "Bole Medhanialem", description: "Complete building wash and cleaning", imageIndex: 16 },
-  { id: 18, title: "Office Polish", category: "office", location: "Addis Ababa", description: "Office floor polishing and cleaning", imageIndex: 17 },
-  { id: 19, title: "Facility Care", category: "commercial", location: "Amecha", description: "Ongoing facility care service", imageIndex: 18 },
-  { id: 20, title: "Deep Sanitize", category: "cleaning", location: "Addis Ababa", description: "Deep sanitization and disinfection", imageIndex: 19 },
-  { id: 21, title: "Office Refresh", category: "office", location: "Bole", description: "Complete office refresh cleaning", imageIndex: 20 },
-  { id: 22, title: "Building Shine", category: "building", location: "Addis Ababa", description: "Building shine and maintenance", imageIndex: 21 },
-  { id: 23, title: "Commercial Clean", category: "commercial", location: "Kazanchis", description: "Commercial space regular cleaning", imageIndex: 22 },
-  { id: 24, title: "Office Maintenance", category: "office", location: "Megenagna", description: "Scheduled office maintenance", imageIndex: 23 },
-  { id: 25, title: "Building Service", category: "building", location: "Addis Ababa", description: "Full building cleaning service", imageIndex: 24 },
-  { id: 26, title: "Space Cleaning", category: "cleaning", location: "Addis Ababa", description: "Complete space cleaning", imageIndex: 25 },
-  { id: 27, title: "Office Care", category: "office", location: "Bole", description: "Premium office care service", imageIndex: 26 },
-  { id: 28, title: "Building Detail", category: "building", location: "Addis Ababa", description: "Detailed building maintenance", imageIndex: 27 },
-  { id: 29, title: "Commercial Care", category: "commercial", location: "Mercato", description: "Commercial facility care", imageIndex: 28 },
-  { id: 30, title: "Final Touch", category: "cleaning", location: "Addis Ababa", description: "Final touch cleaning service", imageIndex: 29 },
-];
-
-const videoItems = [
-  { id: 101, title: "Cleaning in Action", category: "video", location: "Addis Ababa", description: "Watch our team at work", src: "/images/work/work-video-1.mp4" },
-  { id: 102, title: "Team at Work", category: "video", location: "Megenagna", description: "Professional cleaning process", src: "/images/work/work-video-2.mp4" },
+const galleryItems: GalleryItem[] = [
+  // 10 Selected Images
+  {
+    id: 1,
+    type: "image",
+    category: "office",
+    src: "/images/work/work-01.jpg",
+    title: {
+      en: "Corporate Office Cleaning",
+      am: "የኮርፖሬት ቢሮ ጽዳት",
+    },
+    location: {
+      en: "Megenagna, Addis Ababa",
+      am: "መገናኛ፣ አዲስ አበባ",
+    },
+    description: {
+      en: "Complete workspace cleaning, desk sanitization, and floor maintenance",
+      am: "ሙሉ የስራ ቦታ ጽዳት፣ የጠረጴዛ ማጽዳት እና የወለል እንክብካቤ",
+    },
+  },
+  {
+    id: 2,
+    type: "image",
+    category: "building",
+    src: "/images/work/work-05.jpg",
+    title: {
+      en: "Commercial Building Maintenance",
+      am: "የንግድ ህንጻ ጥገና እና ጽዳት",
+    },
+    location: {
+      en: "Bole, Addis Ababa",
+      am: "ቦሌ፣ አዲስ አበባ",
+    },
+    description: {
+      en: "High-shine rotary floor scrubbing, buffing machine maintenance, and polished finish",
+      am: "በማሽን የተወለወለ እና የሚያብረቀርቅ ከፍተኛ የወለል ጽዳት እና አጨራረስ",
+    },
+  },
+  {
+    id: 3,
+    type: "image",
+    category: "commercial",
+    src: "/images/work/work-07.jpg",
+    title: {
+      en: "Commercial Shopping Complex",
+      am: "የንግድ እና የገበያ ማዕከል",
+    },
+    location: {
+      en: "Kazanchis, Addis Ababa",
+      am: "ካዛንቺስ፣ አዲስ አበባ",
+    },
+    description: {
+      en: "Deep cleaning and floor sanitization for high-traffic retail spaces",
+      am: "ለከፍተኛ እንቅስቃሴ የገበያ ቦታዎች ጥልቅ ጽዳት እና የወለል ንጽህና",
+    },
+  },
+  {
+    id: 4,
+    type: "image",
+    category: "cleaning",
+    src: "/images/work/work-08.jpg",
+    title: {
+      en: "Deep Sanitization Service",
+      am: "ጥልቅ የጽዳት እና ማምከን አገልግሎት",
+    },
+    location: {
+      en: "Amecha, Addis Ababa",
+      am: "አሜቻ፣ አዲስ አበባ",
+    },
+    description: {
+      en: "Intensive sanitization, chemical disinfection, and surface polishing",
+      am: "ጥልቅ ጽዳት፣ ኬሚካላዊ ማምከን እና የገጽታ ማብራት ስራ",
+    },
+  },
+  {
+    id: 5,
+    type: "image",
+    category: "office",
+    src: "/images/work/work-11.jpg",
+    title: {
+      en: "Executive Office Sanitization",
+      am: "የስራ አስፈፃሚ ቢሮ ጽዳት",
+    },
+    location: {
+      en: "Bole Medhanialem",
+      am: "ቦሌ መድኃኔዓለም",
+    },
+    description: {
+      en: "Scheduled daily office sanitization and conference room hygiene",
+      am: "የታቀደ ዕለታዊ የቢሮ እና የመሰብሰቢያ አዳራሽ ንጽህና አጠባበቅ",
+    },
+  },
+  {
+    id: 6,
+    type: "image",
+    category: "building",
+    src: "/images/work/work-12.jpg",
+    title: {
+      en: "Multi-Story Building Care",
+      am: "የፎቅ ህንጻዎች እንክብካቤ",
+    },
+    location: {
+      en: "Summit, Addis Ababa",
+      am: "ሰሚት፣ አዲስ አበባ",
+    },
+    description: {
+      en: "Common areas, staircases, and lobby maintenance with shift leader supervision",
+      am: "የጋራ መተላለፊያዎች፣ ደረጃዎች እና ሎቢ በፈረቃ መሪዎች ቁጥጥር የሚከናወን ጽዳት",
+    },
+  },
+  {
+    id: 7,
+    type: "image",
+    category: "commercial",
+    src: "/images/work/work-15.jpg",
+    title: {
+      en: "Retail Facility Care",
+      am: "የችርቻሮ እና የንግድ ተቋም ጽዳት",
+    },
+    location: {
+      en: "Mercato, Addis Ababa",
+      am: "መርካቶ፣ አዲስ አበባ",
+    },
+    description: {
+      en: "Comprehensive retail space and storage facility cleaning",
+      am: "አጠቃላይ የንግድ መደብሮች እና የመጋዘን ቦታዎች ጽዳት",
+    },
+  },
+  {
+    id: 8,
+    type: "image",
+    category: "cleaning",
+    src: "/images/work/work-17.jpg",
+    title: {
+      en: "Floor Restoration & Polishing",
+      am: "የወለል ማደስ እና ማብራት ስራ",
+    },
+    location: {
+      en: "Addis Ababa",
+      am: "አዲስ አበባ",
+    },
+    description: {
+      en: "Machine scrubbing, wax application, and high-gloss floor buffing",
+      am: "በማሽን ማሸት፣ ሰም መቀባት እና ከፍተኛ አንጸባራቂ የወለል ወለላ",
+    },
+  },
+  {
+    id: 9,
+    type: "image",
+    category: "office",
+    src: "/images/work/work-20.jpg",
+    title: {
+      en: "Open Workspace Maintenance",
+      am: "የክፍት የስራ ቦታ እንክብካቤ",
+    },
+    location: {
+      en: "Kazanchis, Addis Ababa",
+      am: "ካዛንቺስ፣ አዲስ አበባ",
+    },
+    description: {
+      en: "Day-to-day workspace vacuuming, trash disposal, and sanitization",
+      am: "የዕለት ተዕለት የቫክዩም ጽዳት፣ የቆሻሻ አወጋገድ እና የንጽህና ስራ",
+    },
+  },
+  {
+    id: 10,
+    type: "image",
+    category: "building",
+    src: "/images/work/work-26.jpg",
+    title: {
+      en: "Building Interior & Glass Cleaning",
+      am: "የህንጻ ውስጣዊ እና የመስታወት ጽዳት",
+    },
+    location: {
+      en: "Bole, Addis Ababa",
+      am: "ቦሌ፣ አዲስ አበባ",
+    },
+    description: {
+      en: "Interior glass partitions, windows, and high-level architectural surface cleaning",
+      am: "የውስጥ መስታወቶች፣ መስኮቶች እና ከፍ ያሉ የህንጻ ገጽታዎች ጽዳት",
+    },
+  },
+  // 2 Videos
+  {
+    id: 101,
+    type: "video",
+    category: "video",
+    src: "/images/work/work-video-1.mp4",
+    title: {
+      en: "Cleaning Crew in Action",
+      am: "የጽዳት ቡድናችን በተግባር",
+    },
+    location: {
+      en: "Addis Ababa",
+      am: "አዲስ አበባ",
+    },
+    description: {
+      en: "Watch our dedicated cleaning crew performing specialized commercial cleaning",
+      am: "ቁርጠኛ የጽዳት ቡድናችን ልዩ የንግድ ተቋማት ጽዳት ሲያከናውን ይመልከቱ",
+    },
+  },
+  {
+    id: 102,
+    type: "video",
+    category: "video",
+    src: "/images/work/work-video-2.mp4",
+    title: {
+      en: "Shift Leader Coordination",
+      am: "የፈረቃ መሪዎች ቅንጅት",
+    },
+    location: {
+      en: "Megenagna, Addis Ababa",
+      am: "መገናኛ፣ አዲስ አበባ",
+    },
+    description: {
+      en: "On-site quality supervision and team coordination in real time",
+      am: "የቀጥታ ጥራት ቁጥጥር እና የቡድን ቅንጅት በስራ ቦታ ላይ",
+    },
+  },
 ];
 
 export default function GalleryPage() {
+  const { t, language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("all");
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [lightboxVideo, setLightboxVideo] = useState<string | null>(null);
 
-  const allItems = [
-    ...projects.map((p) => ({ ...p, type: "image" as const })),
-    ...videoItems.map((v) => ({ ...v, type: "video" as const })),
+  const categories = [
+    { id: "all", label: t.gallery.filters.all },
+    { id: "cleaning", label: t.gallery.filters.cleaning },
+    { id: "office", label: t.gallery.filters.office },
+    { id: "building", label: t.gallery.filters.building },
+    { id: "commercial", label: t.gallery.filters.commercial },
+    { id: "video", label: t.gallery.filters.videos },
   ];
+
+  const categoryLabels: Record<string, string> = {
+    cleaning: t.gallery.filters.cleaning,
+    office: t.gallery.filters.office,
+    building: t.gallery.filters.building,
+    commercial: t.gallery.filters.commercial,
+    video: t.gallery.videoLabel,
+  };
 
   const filteredItems =
     activeCategory === "all"
-      ? allItems
-      : allItems.filter((item) => item.category === activeCategory);
+      ? galleryItems
+      : galleryItems.filter((item) => item.category === activeCategory);
 
   return (
     <>
@@ -127,18 +301,17 @@ export default function GalleryPage() {
               className="mx-auto max-w-3xl text-center"
             >
               <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-                Our Work
+                {t.gallery.badge}
               </span>
               <h1 className="mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
-                Project Gallery
+                {t.gallery.title}
               </h1>
               <p className="mt-4 text-base sm:text-lg text-muted-foreground">
-                Explore our portfolio of cleaning projects across offices,
-                buildings, and commercial facilities in Addis Ababa, Ethiopia
+                {t.gallery.subtitle}
               </p>
               <div className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
                 <span className="h-1.5 w-1.5 rounded-full bg-[var(--ethiopian-green)]" />
-                <span>🇪🇹 Proudly Ethiopian</span>
+                <span>{t.gallery.proudly}</span>
                 <span className="h-1.5 w-1.5 rounded-full bg-[var(--ethiopian-red)]" />
               </div>
             </motion.div>
@@ -192,9 +365,9 @@ export default function GalleryPage() {
                       className="group relative overflow-hidden rounded-2xl border bg-card transition-all hover:-translate-y-2 hover:shadow-xl cursor-pointer"
                       onClick={() => {
                         if (isVideo) {
-                          setLightboxVideo((item as any).src);
+                          setLightboxVideo(item.src);
                         } else {
-                          setLightboxImage(galleryImages[(item as any).imageIndex]);
+                          setLightboxImage(item.src);
                         }
                       }}
                     >
@@ -203,21 +376,24 @@ export default function GalleryPage() {
                         {isVideo ? (
                           <>
                             <video
-                              src={(item as any).src}
+                              src={item.src}
                               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                               muted
                               preload="metadata"
                             />
                             <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform group-hover:scale-110">
-                                <Play className="h-6 w-6 text-primary ml-1" fill="currentColor" />
+                                <Play
+                                  className="h-6 w-6 text-primary ml-1"
+                                  fill="currentColor"
+                                />
                               </div>
                             </div>
                           </>
                         ) : (
                           <Image
-                            src={galleryImages[(item as any).imageIndex]}
-                            alt={item.title}
+                            src={item.src}
+                            alt={item.title[language]}
                             fill
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
@@ -239,9 +415,7 @@ export default function GalleryPage() {
                             ) : (
                               <Sparkles className="mx-auto h-8 w-8" />
                             )}
-                            <p className="mt-3 text-sm">
-                              {item.description}
-                            </p>
+                            <p className="mt-3 text-sm">{item.description[language]}</p>
                           </div>
                         </motion.div>
                       </div>
@@ -251,15 +425,17 @@ export default function GalleryPage() {
                         <div className="flex items-start justify-between gap-2">
                           <div className="min-w-0">
                             <h3 className="text-sm sm:font-semibold transition-colors group-hover:text-primary truncate">
-                              {item.title}
+                              {item.title[language]}
                             </h3>
                             <p className="mt-1 text-xs sm:text-sm text-muted-foreground flex items-center gap-1">
                               <MapPin className="h-3 w-3 shrink-0" />
-                              <span className="truncate">{item.location}</span>
+                              <span className="truncate">{item.location[language]}</span>
                             </p>
                           </div>
                           <span className="shrink-0 rounded-full bg-muted px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-medium capitalize">
-                            {isVideo ? "🎬 Video" : item.category}
+                            {isVideo
+                              ? `🎬 ${t.gallery.videoLabel}`
+                              : (categoryLabels[item.category] || item.category)}
                           </span>
                         </div>
                       </div>
@@ -276,7 +452,7 @@ export default function GalleryPage() {
                 className="py-20 text-center"
               >
                 <p className="text-muted-foreground">
-                  No projects found in this category.
+                  {t.gallery.noProjects}
                 </p>
               </motion.div>
             )}
@@ -288,13 +464,16 @@ export default function GalleryPage() {
           <Container>
             <div className="grid gap-6 sm:gap-8 text-center grid-cols-2 md:grid-cols-4">
               {[
-                { value: "35+", label: "Projects Completed" },
-                { value: "40+", label: "Dedicated Staff" },
-                { value: "98%", label: "Client Satisfaction" },
-                { value: "1–2 Yrs", label: "Field Experience" },
+                { value: "35+", label: t.gallery.stats.projects },
+                { value: "40+", label: t.gallery.stats.team },
+                { value: "98%", label: t.gallery.stats.satisfaction },
+                {
+                  value: language === "am" ? "2 ዓመታት" : "2 years",
+                  label: t.gallery.stats.years,
+                },
               ].map((stat, index) => (
                 <motion.div
-                  key={stat.label}
+                  key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -329,17 +508,16 @@ export default function GalleryPage() {
               </div>
               <div className="relative z-10">
                 <h2 className="text-2xl font-bold text-white sm:text-3xl">
-                  Want to See Your Space Here?
+                  {t.gallery.ctaTitle}
                 </h2>
                 <p className="mx-auto mt-3 max-w-lg text-primary-foreground/80">
-                  Contact us today for a free quote and let us show you the BTD
-                  Trading PLC difference. Proudly serving Addis Ababa, Ethiopia.
+                  {t.gallery.ctaText}
                 </p>
                 <Link
                   href="/contact"
                   className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-medium text-primary transition-all hover:bg-white/90 hover:shadow-lg"
                 >
-                  Get a Free Quote
+                  {t.gallery.getQuote}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -361,6 +539,7 @@ export default function GalleryPage() {
             onClick={() => setLightboxImage(null)}
           >
             <button
+              aria-label={language === "am" ? "ዝጋ" : "Close"}
               className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30"
               onClick={() => setLightboxImage(null)}
             >
@@ -375,7 +554,7 @@ export default function GalleryPage() {
             >
               <Image
                 src={lightboxImage}
-                alt="Gallery photo"
+                alt={language === "am" ? "የጋለሪ ፎቶ" : "Gallery photo"}
                 width={1200}
                 height={900}
                 className="rounded-lg object-contain"
@@ -397,6 +576,7 @@ export default function GalleryPage() {
             onClick={() => setLightboxVideo(null)}
           >
             <button
+              aria-label={language === "am" ? "ዝጋ" : "Close"}
               className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 z-10"
               onClick={() => setLightboxVideo(null)}
             >

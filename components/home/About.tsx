@@ -14,7 +14,7 @@ export function About() {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const stats = [
-    { value: "1–2 Yrs", label: t.about.years },
+    { value: "2 years", label: t.about.years },
     { value: "40+", label: t.about.team },
     { value: t.about.contractsVal, label: t.about.contracts },
     { value: t.about.leadershipVal, label: t.about.leadership },
@@ -62,7 +62,9 @@ export function About() {
                   <div>
                     <div className="flex items-center gap-1.5">
                       <p className="text-sm font-bold text-foreground">
-                        {language === "am" ? "40+ ቁርጠኛ ሠራተኞች" : "40+ Dedicated Staff"}
+                        {language === "am"
+                          ? "40+ ቁርጠኛ ሠራተኞች"
+                          : "40+ Dedicated Staff"}
                       </p>
                       <ShieldCheck className="h-3.5 w-3.5 text-primary" />
                     </div>
