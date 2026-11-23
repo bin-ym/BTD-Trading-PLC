@@ -12,7 +12,7 @@ The application, codebase, UI structure, and documentation for **BTD Trading PLC
   * **Logo Display:** Integrated `/images/logo.png` in a prominent, frosted glass branding badge alongside the official company identity and Ethiopian origin tag.
   * **Workers Info Badge:** Added dynamic badge highlighting `"40+ Dedicated Staff • On-Site Shift Leaders"` and `"100% Vetted & Insured"`.
   * **Core Statistics Grid:** Displayed directly within the Hero section with dedicated icons and visual containers:
-    1. **Experience:** **1–2 years of field experience** (`Clock` icon)
+    1. **Experience:** **2 years of field experience** (`Clock` icon)
     2. **Team Members:** **40+ dedicated staff members** (`Users` icon)
     3. **Contract Terms:** **Flexible long-term and short-term service contracts** (`FileCheck` icon)
     4. **Leadership Structure:** **Dedicated Shift Leaders managing on-site teams** (`UserCheck` icon)

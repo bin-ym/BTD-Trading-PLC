@@ -37,7 +37,7 @@
 | **City** | Addis Ababa |
 | **Location** | Megenagna / Amecha |
 | **Service Type** | Cleaning, Polishing & Facility Support Services |
-| **Field Experience** | **1–2 years of field experience** |
+| **Field Experience** | **2 years of field experience** |
 | **Total Team Members** | **40+ dedicated staff members** |
 | **Contract Terms** | **Flexible long-term and short-term service contracts (1, 2, 3+ years or periodic)** |
 | **Leadership Structure** | **Dedicated Shift Leaders managing on-site teams** |
@@ -49,7 +49,7 @@
 
 **BTD Trading PLC** is a professional Ethiopian company providing high-quality, reliable, and flexible cleaning and facility support services to both **Government and Non-Government Organizations** across Addis Ababa.
 
-With **1–2 years of practical field experience** and a deployed workforce of **40+ dedicated staff members**, we deliver disciplined, immaculate cleaning services. Our operational excellence is maintained by **Dedicated Shift Leaders** stationed directly at client facilities to oversee real-time service quality, staff attendance, safety standards, and immediate communication.
+With **2 years of practical field experience** and a deployed workforce of **40+ dedicated staff members**, we deliver disciplined, immaculate cleaning services. Our operational excellence is maintained by **Dedicated Shift Leaders** stationed directly at client facilities to oversee real-time service quality, staff attendance, safety standards, and immediate communication.
 
 Our operations emphasize:
 1. **Hygiene & Sanitation** — Hospital-grade disinfection and strict sanitization.

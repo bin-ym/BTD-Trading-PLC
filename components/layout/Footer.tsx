@@ -14,18 +14,18 @@ const phoneNumbers = [
 ];
 
 const quickLinks = [
-  { href: "/", label: "home" },
-  { href: "/about", label: "about" },
-  { href: "/services", label: "services" },
-  { href: "/gallery", label: "gallery" },
-  { href: "/contact", label: "contact" },
+  { href: "/", label: "home" as const },
+  { href: "/about", label: "about" as const },
+  { href: "/services", label: "services" as const },
+  { href: "/gallery", label: "gallery" as const },
+  { href: "/contact", label: "contact" as const },
 ];
 
-const services = [
-  { href: "/services/office-cleaning", label: "Office Cleaning" },
-  { href: "/services/building-cleaning", label: "Building Cleaning" },
-  { href: "/services/commercial-cleaning", label: "Commercial Cleaning" },
-  { href: "/services/hospital-cleaning", label: "Hospital Cleaning" },
+const serviceLinks = [
+  { href: "/services/office-cleaning", key: "office" as const },
+  { href: "/services/building-cleaning", key: "building" as const },
+  { href: "/services/commercial-cleaning", key: "commercial" as const },
+  { href: "/services/hospital-cleaning", key: "hospital" as const },
 ];
 
 const socialLinks = [
@@ -79,59 +79,56 @@ export function Footer() {
 
   return (
     <footer className="border-t bg-muted/40 ethiopian-glow">
-      <div className="container mx-auto grid gap-10 px-6 py-16 sm:grid-cols-2 lg:grid-cols-4">
-
+      <div className="container mx-auto grid gap-8 sm:gap-10 px-4 sm:px-6 py-12 sm:py-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {/* Brand */}
         <div className="sm:col-span-2 lg:col-span-1">
           <Link
             href="/"
-            className="mb-4 flex items-center gap-2"
+            className="mb-4 flex items-center gap-2.5 sm:gap-3"
           >
             <Image
               src="/images/logo.png"
               alt="BTD Trading PLC Logo"
-              width={32}
-              height={32}
-              className="h-8 w-8 rounded-lg object-contain"
+              width={36}
+              height={36}
+              className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg object-contain"
             />
 
-            <span className="text-lg font-bold">
+            <span className="text-base sm:text-lg font-bold tracking-tight">
               BTD Trading PLC
             </span>
           </Link>
 
-          <p className="text-sm leading-7 text-muted-foreground">
-            Professional cleaning & trading services for offices,
-            commercial buildings, hospitals, and institutions in
-            Addis Ababa, Ethiopia.
+          <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground">
+            {t.footer.description}
           </p>
 
           <a
             href={MAP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-primary"
+            className="mt-3.5 inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-primary"
             aria-label="View BTD Trading PLC location on Google Maps"
           >
-            <MapPin className="h-3 w-3 shrink-0" />
-            <span>Megenagna, Amecha - Addis Ababa</span>
+            <MapPin className="h-3.5 w-3.5 shrink-0 text-primary" />
+            <span className="truncate">{t.footer.address}</span>
           </a>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h4 className="mb-4 font-semibold">
+          <h4 className="mb-3 sm:mb-4 text-sm sm:text-base font-semibold text-foreground">
             {t.footer.quickLinks}
           </h4>
 
-          <nav className="flex flex-col gap-3 text-sm text-muted-foreground">
+          <nav className="flex flex-col gap-2.5 text-xs sm:text-sm text-muted-foreground">
             {quickLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="transition-colors hover:text-foreground"
+                className="transition-colors hover:text-foreground py-0.5"
               >
-                {t.nav[label as keyof typeof t.nav]}
+                {t.nav[label]}
               </Link>
             ))}
           </nav>
@@ -139,18 +136,18 @@ export function Footer() {
 
         {/* Services */}
         <div>
-          <h4 className="mb-4 font-semibold">
-            Our Services
+          <h4 className="mb-3 sm:mb-4 text-sm sm:text-base font-semibold text-foreground">
+            {t.footer.ourServices}
           </h4>
 
-          <nav className="flex flex-col gap-3 text-sm text-muted-foreground">
-            {services.map(({ href, label }) => (
+          <nav className="flex flex-col gap-2.5 text-xs sm:text-sm text-muted-foreground">
+            {serviceLinks.map(({ href, key }) => (
               <Link
                 key={href}
                 href={href}
-                className="transition-colors hover:text-foreground"
+                className="transition-colors hover:text-foreground py-0.5"
               >
-                {label}
+                {t.services[key]}
               </Link>
             ))}
           </nav>
@@ -158,31 +155,26 @@ export function Footer() {
 
         {/* Contact */}
         <div>
-          <h4 className="mb-4 font-semibold">
+          <h4 className="mb-3 sm:mb-4 text-sm sm:text-base font-semibold text-foreground">
             {t.footer.contact}
           </h4>
 
-          <div className="space-y-4 text-sm text-muted-foreground">
-
+          <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm text-muted-foreground">
             {/* Address */}
             <a
               href={MAP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-start gap-3 transition-colors hover:text-primary"
+              className="flex items-start gap-2.5 transition-colors hover:text-primary"
               aria-label="View BTD Trading PLC address on Google Maps"
             >
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-
-              <span>
-                Addis Ababa, Ethiopia / Megenagna / Amecha
-              </span>
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+              <span>{t.footer.address}</span>
             </a>
 
             {/* Phone Numbers */}
-            <div className="flex items-start gap-3">
-              <Phone className="mt-0.5 h-4 w-4 shrink-0" />
-
+            <div className="flex items-start gap-2.5">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
               <div className="flex flex-col gap-1">
                 {phoneNumbers.map((phone) => (
                   <a
@@ -199,16 +191,15 @@ export function Footer() {
             {/* Email */}
             <a
               href={`mailto:${t.contact.emailValue}`}
-              className="flex items-center gap-3 transition-colors hover:text-primary"
+              className="flex items-center gap-2.5 transition-colors hover:text-primary break-all"
             >
-              <Mail className="h-4 w-4 shrink-0" />
-
+              <Mail className="h-4 w-4 shrink-0 text-primary" />
               <span>{t.contact.emailValue}</span>
             </a>
           </div>
 
           {/* Social Links */}
-          <div className="mt-5 flex gap-3">
+          <div className="mt-4 sm:mt-5 flex gap-2.5">
             {socialLinks.map(({ href, label, icon }) => (
               <a
                 key={label}
@@ -226,26 +217,25 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t py-6">
-        <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-6 text-center text-sm text-muted-foreground sm:flex-row sm:text-left">
+      <div className="border-t py-5 sm:py-6">
+        <div className="container mx-auto flex flex-col items-center justify-between gap-3 px-4 sm:px-6 text-center text-xs sm:text-sm text-muted-foreground sm:flex-row sm:text-left">
           <span>
-            © {new Date().getFullYear()} BTD Trading PLC.{" "}
-            {t.footer.rights}
+            © {new Date().getFullYear()} BTD Trading PLC. {t.footer.rights}
           </span>
 
-          <div className="flex gap-4">
+          <div className="flex flex-wrap justify-center gap-4 text-xs sm:text-sm">
             <Link
               href="/privacy"
               className="transition-colors hover:text-foreground"
             >
-              Privacy Policy
+              {t.footer.privacyPolicy}
             </Link>
 
             <Link
               href="/terms"
               className="transition-colors hover:text-foreground"
             >
-              Terms of Service
+              {t.footer.termsOfService}
             </Link>
           </div>
         </div>

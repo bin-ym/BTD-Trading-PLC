@@ -5,13 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight,
-  Sparkles,
   Users,
   Clock,
   FileCheck,
   UserCheck,
   Building2,
-  PartyPopper,
+  Briefcase,
   ShieldCheck,
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -62,7 +61,7 @@ export function Hero() {
   ];
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-24 pb-16">
+    <section className="relative flex min-h-[90vh] sm:min-h-screen items-center justify-center overflow-hidden pt-20 sm:pt-24 pb-12 sm:pb-16">
       {/* Background image with overlays */}
       <Image
         src="/images/work/work-08.jpg"
@@ -75,7 +74,7 @@ export function Hero() {
         blurDataURL={blurPlaceholder}
       />
       <div className="absolute inset-0 bg-gradient-to-br from-primary/85 via-background/75 to-background/90" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/25 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/25 via-transparent to-transparent pointer-events-none" />
 
       {/* Animated decorative elements */}
       <motion.div
@@ -84,7 +83,7 @@ export function Hero() {
           opacity: [0.3, 0.5, 0.3],
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -left-20 top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl pointer-events-none"
+        className="absolute -left-20 top-20 h-48 w-48 sm:h-64 sm:w-64 rounded-full bg-primary/20 blur-3xl pointer-events-none"
       />
       <motion.div
         animate={{
@@ -92,10 +91,10 @@ export function Hero() {
           opacity: [0.2, 0.4, 0.2],
         }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -right-20 bottom-20 h-80 w-80 rounded-full bg-primary/30 blur-3xl pointer-events-none"
+        className="absolute -right-20 bottom-20 h-56 w-56 sm:h-80 sm:w-80 rounded-full bg-primary/30 blur-3xl pointer-events-none"
       />
 
-      <div className="container relative mx-auto px-6 py-12 sm:py-20">
+      <div className="container relative mx-auto px-4 sm:px-6 py-8 sm:py-16 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
@@ -107,11 +106,11 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isVisible ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.15, duration: 0.5 }}
-            className="mb-8 flex flex-col items-center justify-center gap-3"
+            className="mb-6 sm:mb-8 flex flex-col items-center justify-center gap-2.5 sm:gap-3"
           >
             {/* Logo + Company Identity Badge */}
-            <div className="group flex items-center gap-3 rounded-full border border-primary/20 bg-background/80 px-4 py-2 shadow-sm backdrop-blur-md transition-all hover:border-primary/40">
-              <div className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-1 shadow-inner">
+            <div className="group flex max-w-full items-center gap-2.5 sm:gap-3 rounded-full border border-primary/20 bg-background/80 px-3 py-1.5 sm:px-4 sm:py-2 shadow-xs backdrop-blur-md transition-all hover:border-primary/40">
+              <div className="relative flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-1 shadow-inner">
                 <Image
                   src="/images/logo.png"
                   alt="BTD Trading PLC Logo"
@@ -120,14 +119,14 @@ export function Hero() {
                   className="h-full w-full object-contain"
                 />
               </div>
-              <div className="text-left">
+              <div className="text-left min-w-0">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-bold tracking-tight text-foreground sm:text-sm">
+                  <span className="text-xs sm:text-sm font-bold tracking-tight text-foreground truncate">
                     BTD Trading PLC
                   </span>
-                  <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+                  <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-primary" />
                 </div>
-                <p className="text-[10px] text-muted-foreground">
+                <p className="text-[10px] sm:text-[11px] text-muted-foreground truncate">
                   {language === "am"
                     ? "ቢቲዲ ትሬዲንግ ኃ.የተ. የግል. ማህበር"
                     : "Professional Cleaning & Facility Support"}
@@ -136,15 +135,15 @@ export function Hero() {
             </div>
 
             {/* Workers Info & Location Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-xs font-medium text-primary">
-                <Users className="h-3.5 w-3.5" />
+            <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] sm:text-xs">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 font-medium text-primary">
+                <Users className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" />
                 <span>{t.hero.workersBadge}</span>
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-xs">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--ethiopian-green)]" />
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-primary/20 bg-background/60 px-3 py-1 font-medium text-muted-foreground backdrop-blur-xs">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--ethiopian-green)]" />
                 <span>🇪🇹 Addis Ababa (Megenagna / Amecha)</span>
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--ethiopian-red)]" />
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--ethiopian-red)]" />
               </div>
             </div>
           </motion.div>
@@ -154,7 +153,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
+            className="text-3xl font-extrabold tracking-tight text-foreground min-[480px]:text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight"
           >
             {t.hero.title}{" "}
             <span className="bg-gradient-to-r from-primary via-sky-500 to-primary bg-clip-text text-transparent">
@@ -166,7 +165,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+            className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground"
           >
             {t.hero.description}
           </motion.p>
@@ -176,21 +175,21 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="mt-8 flex flex-wrap justify-center gap-4"
+            className="mt-6 sm:mt-8 flex flex-col min-[480px]:flex-row items-center justify-center gap-3 sm:gap-4 w-full"
           >
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 sm:px-8 sm:py-4 font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:scale-105"
+              className="group inline-flex w-full min-[480px]:w-auto items-center justify-center gap-2 rounded-full bg-primary px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:scale-105"
             >
-              {t.hero.getQuote}
+              <span>{t.hero.getQuote}</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
 
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-primary/30 bg-background/60 px-7 py-3.5 sm:px-8 sm:py-4 font-semibold text-foreground backdrop-blur-sm transition-all hover:border-primary hover:bg-primary/10"
+              className="inline-flex w-full min-[480px]:w-auto items-center justify-center gap-2 rounded-full border-2 border-primary/30 bg-background/60 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-foreground backdrop-blur-sm transition-all hover:border-primary hover:bg-primary/10"
             >
-              {t.hero.ourServices}
+              <span>{t.hero.ourServices}</span>
             </Link>
           </motion.div>
 
@@ -199,16 +198,16 @@ export function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.6, duration: 0.7 }}
-            className="mt-6 flex flex-wrap items-center justify-center gap-2.5 text-xs font-medium"
+            className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 text-xs font-medium"
           >
             <span className="text-muted-foreground">
               {language === "am" ? "ቁልፍ አገልግሎቶች፦" : "Key Focus:"}
             </span>
             <Link
               href="/services/building-cleaning"
-              className="inline-flex items-center gap-1.5 rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-sky-600 dark:text-sky-400 transition-colors hover:bg-sky-500/20"
+              className="inline-flex items-center gap-1.5 rounded-full border border-sky-500/30 bg-sky-500/10 px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs text-sky-600 dark:text-sky-400 transition-colors hover:bg-sky-500/20"
             >
-              <Building2 className="h-3 w-3" />
+              <Building2 className="h-3 w-3 shrink-0" />
               <span>
                 {language === "am"
                   ? "የህንጻ ጽዳት (ከማብሪያ አጨራረስ ጋር)"
@@ -216,14 +215,14 @@ export function Hero() {
               </span>
             </Link>
             <Link
-              href="/services/service-galas-support"
-              className="inline-flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 px-3 py-1 text-purple-600 dark:text-purple-400 transition-colors hover:bg-purple-500/20"
+              href="/services/office-cleaning"
+              className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs text-blue-600 dark:text-blue-400 transition-colors hover:bg-blue-500/20"
             >
-              <PartyPopper className="h-3 w-3" />
+              <Briefcase className="h-3 w-3 shrink-0" />
               <span>
                 {language === "am"
-                  ? "የድግስ እና የክብረ በዓላት ድጋፍ"
-                  : "Service & Galas Support"}
+                  ? "የቢሮ ጽዳት"
+                  : "Corporate Office Cleaning"}
               </span>
             </Link>
           </motion.div>
@@ -233,27 +232,27 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.75, duration: 0.8 }}
-            className="mt-10 sm:mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4"
+            className="mt-8 sm:mt-12 md:mt-14 grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-4"
           >
             {coreStats.map((stat, index) => {
               const Icon = stat.icon;
               return (
                 <div
                   key={index}
-                  className="group relative flex flex-col items-center justify-center rounded-2xl border border-border/80 bg-background/80 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
+                  className="group relative flex flex-col items-center justify-center rounded-xl sm:rounded-2xl border border-border/80 bg-background/80 p-3 sm:p-4 shadow-xs backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
                 >
                   <div
-                    className={`mb-2.5 flex h-10 w-10 items-center justify-center rounded-xl ${stat.bg} ${stat.color} transition-transform duration-300 group-hover:scale-110`}
+                    className={`mb-2 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl ${stat.bg} ${stat.color} transition-transform duration-300 group-hover:scale-110`}
                   >
-                    <Icon className="h-5 w-5" />
+                    <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </div>
-                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-foreground">
+                  <span className="text-lg sm:text-2xl font-extrabold tracking-tight text-foreground">
                     {stat.value}
                   </span>
-                  <span className="text-xs font-semibold text-foreground/90 text-center">
+                  <span className="text-[11px] sm:text-xs font-semibold text-foreground/90 text-center">
                     {stat.label}
                   </span>
-                  <span className="text-[10px] text-muted-foreground text-center">
+                  <span className="text-[9px] sm:text-[10px] text-muted-foreground text-center">
                     {stat.sublabel}
                   </span>
                 </div>
@@ -266,9 +265,9 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={isVisible ? { opacity: 1 } : {}}
             transition={{ delay: 0.95, duration: 0.8 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs sm:text-sm text-muted-foreground"
+            className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-muted-foreground"
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <motion.div
                 animate={{ scale: [1, 1.4, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -276,11 +275,11 @@ export function Hero() {
               />
               <span>{t.hero.available}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <span className="font-bold text-foreground">35+</span>
               <span>{t.hero.projects}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <span className="font-bold text-foreground">98%</span>
               <span>{t.hero.satisfaction}</span>
             </div>
@@ -288,17 +287,17 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - hide on very short screens */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isVisible ? { opacity: 1 } : {}}
         transition={{ delay: 1.3 }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2"
+        className="absolute bottom-3 left-1/2 -translate-x-1/2 hidden sm:block"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="h-9 w-5 rounded-full border-2 border-primary/30 flex justify-center pt-1.5"
+          className="h-8 w-4 sm:h-9 sm:w-5 rounded-full border-2 border-primary/30 flex justify-center pt-1.5"
         >
           <motion.div
             animate={{ opacity: [1, 0.3, 1] }}

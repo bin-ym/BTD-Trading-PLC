@@ -12,7 +12,7 @@ export function CTA() {
   const { t } = useLanguage();
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-16 sm:py-24">
+    <section ref={sectionRef} className="relative overflow-hidden py-12 sm:py-20 md:py-24">
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary/80" />
       {/* Subtle Ethiopian flag accent at top */}
       <div className="absolute top-0 left-0 right-0 h-1 flex">
@@ -28,7 +28,7 @@ export function CTA() {
           opacity: [0.1, 0.15, 0.1],
         }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-white/10 blur-3xl"
+        className="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-white/10 blur-3xl pointer-events-none"
       />
       <motion.div
         animate={{
@@ -36,45 +36,45 @@ export function CTA() {
           opacity: [0.1, 0.2, 0.1],
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -bottom-32 -right-32 h-64 w-64 rounded-full bg-white/10 blur-3xl"
+        className="absolute -bottom-32 -right-32 h-64 w-64 rounded-full bg-white/10 blur-3xl pointer-events-none"
       />
 
-      <div className="container relative mx-auto px-6">
+      <div className="container relative mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <div className="mb-6 flex items-center justify-center gap-2">
-            <Sparkles className="h-5 w-5 text-white/80" />
-            <span className="text-sm font-medium text-white/80">
+          <div className="mb-4 sm:mb-6 flex items-center justify-center gap-2">
+            <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-white/80" />
+            <span className="text-xs sm:text-sm font-medium text-white/80">
               {t.cta.badge}
             </span>
           </div>
 
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
             {t.cta.title}
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-white/80">
+          <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base md:text-lg text-white/80 leading-relaxed">
             {t.cta.description}
           </p>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 sm:px-8 sm:py-4 font-medium text-primary transition-all hover:shadow-xl hover:shadow-white/25"
+              className="group inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-primary transition-all hover:shadow-xl hover:shadow-white/25 hover:scale-105"
             >
-              {t.cta.getQuote}
+              <span>{t.cta.getQuote}</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
 
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-white/30 px-6 py-3 sm:px-8 sm:py-4 font-medium text-white transition-all hover:bg-white/10"
+              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border-2 border-white/30 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-white transition-all hover:bg-white/10"
             >
-              {t.cta.ourServices}
+              <span>{t.cta.ourServices}</span>
             </Link>
           </div>
         </motion.div>

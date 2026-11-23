@@ -52,25 +52,25 @@ export function WhyChooseUs() {
   ];
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-16 sm:py-24">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+    <section ref={sectionRef} className="relative overflow-hidden py-12 sm:py-20 md:py-24">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
       {/* Subtle Ethiopian pattern overlay */}
-      <div className="absolute inset-0 ethiopian-pattern" />
+      <div className="absolute inset-0 ethiopian-pattern pointer-events-none" />
 
-      <div className="container relative mx-auto px-6">
+      <div className="container relative mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+          <span className="inline-block rounded-full bg-primary/10 px-3.5 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-medium text-primary">
             {t.whyChooseUs.badge}
           </span>
-          <h2 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="mt-4 sm:mt-6 text-2xl font-bold tracking-tight sm:text-4xl">
             {t.whyChooseUs.title}
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-muted-foreground">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
             {t.whyChooseUs.description}
           </p>
         </motion.div>
@@ -83,7 +83,7 @@ export function WhyChooseUs() {
               transition: { staggerChildren: 0.08 },
             },
           }}
-          className="mt-12 sm:mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-10 sm:mt-16 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
         >
           {features.map((feature, index) => {
             const Icon = feature.icon;
@@ -96,10 +96,11 @@ export function WhyChooseUs() {
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                className={`group relative overflow-hidden rounded-2xl border bg-card p-6 sm:p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${hoveredIndex === index
-                  ? "border-primary/30 ring-2 ring-primary/20"
-                  : ""
-                  }`}
+                className={`group relative overflow-hidden rounded-2xl border bg-card p-5 sm:p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${
+                  hoveredIndex === index
+                    ? "border-primary/30 ring-2 ring-primary/20"
+                    : ""
+                }`}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
@@ -111,11 +112,11 @@ export function WhyChooseUs() {
                     <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary transition-colors group-hover:text-white" />
                   </motion.div>
 
-                  <h3 className="mt-4 sm:mt-5 text-base sm:text-lg font-semibold transition-colors group-hover:text-primary">
+                  <h3 className="mt-3.5 sm:mt-5 text-base sm:text-lg font-semibold transition-colors group-hover:text-primary">
                     {feature.title}
                   </h3>
 
-                  <p className="mt-2 text-sm text-muted-foreground">
+                  <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
                     {feature.description}
                   </p>
                 </div>

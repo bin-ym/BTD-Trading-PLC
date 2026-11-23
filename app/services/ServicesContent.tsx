@@ -7,7 +7,6 @@ import {
   Hospital,
   Store,
   Briefcase,
-  PartyPopper,
   Sparkles,
   Shield,
   Clock,
@@ -28,7 +27,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const serviceImages = [
   "/images/work/work-11.jpg",
-  "/images/work/work-26.jpg",
   "/images/work/work-05.jpg",
   "/images/work/work-17.jpg",
   "/images/work/work-23.jpg",
@@ -40,12 +38,6 @@ const serviceMeta = [
     key: "building" as const,
     icon: Building2,
     color: "bg-sky-500",
-  },
-  {
-    slug: "service-galas-support",
-    key: "galas" as const,
-    icon: PartyPopper,
-    color: "bg-purple-500",
   },
   {
     slug: "office-cleaning",
@@ -103,20 +95,20 @@ export function ServicesContent() {
   ];
 
   return (
-    <main className="pt-20">
+    <main className="pt-16 sm:pt-20">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-primary/5 py-16 sm:py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-primary/5 py-12 sm:py-20 md:py-24">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
 
         <Container>
           <AnimateInView className="mx-auto max-w-3xl text-center">
-            <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs sm:text-sm font-semibold text-primary">
+            <span className="inline-block rounded-full bg-primary/10 px-3.5 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-semibold text-primary">
               {t.servicesPage.badge}
             </span>
-            <h1 className="mt-6 text-4xl sm:text-5xl font-extrabold tracking-tight">
+            <h1 className="mt-4 sm:mt-6 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
               {t.servicesPage.title}
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
               {t.servicesPage.subtitle}
             </p>
           </AnimateInView>
@@ -124,11 +116,11 @@ export function ServicesContent() {
       </section>
 
       {/* Services Grid */}
-      <section className="relative overflow-hidden bg-muted/30 py-16 sm:py-24">
+      <section className="relative overflow-hidden bg-muted/30 py-12 sm:py-20 md:py-24">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
 
         <Container className="relative">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
@@ -137,7 +129,7 @@ export function ServicesContent() {
                     href={`/services/${service.slug}`}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
-                    className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-xs transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10 ${
+                    className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-4 sm:p-5 lg:p-6 shadow-xs transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10 ${
                       hoveredIndex === index
                         ? "border-primary/40 ring-2 ring-primary/20"
                         : ""
@@ -145,13 +137,13 @@ export function ServicesContent() {
                   >
                     <div>
                       {/* Service Image */}
-                      <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-xl">
+                      <div className="relative mb-5 aspect-[16/10] overflow-hidden rounded-xl">
                         <Image
                           src={service.image}
                           alt={service.title}
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                           placeholder="blur"
                           blurDataURL={blurPlaceholder}
                         />
@@ -159,24 +151,24 @@ export function ServicesContent() {
 
                         {/* Icon overlay */}
                         <div
-                          className={`absolute bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-xl ${service.color} text-white shadow-lg transition-transform duration-300 group-hover:scale-110`}
+                          className={`absolute bottom-2.5 right-2.5 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl ${service.color} text-white shadow-lg transition-transform duration-300 group-hover:scale-110`}
                         >
-                          <Icon className="h-5 w-5" />
+                          <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                         </div>
                       </div>
 
-                      <h2 className="text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                      <h2 className="text-lg sm:text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
                         {service.title}
                       </h2>
 
-                      <p className="mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">
+                      <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-muted-foreground">
                         {service.description}
                       </p>
                     </div>
 
-                    <div className="mt-6 flex items-center gap-1 text-sm font-semibold text-primary transition-transform group-hover:translate-x-1">
+                    <div className="mt-5 flex items-center gap-1 text-xs sm:text-sm font-semibold text-primary transition-transform group-hover:translate-x-1">
                       <span>{t.servicesPage.learnMore}</span>
-                      <ArrowRight className="h-4 w-4" />
+                      <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     </div>
                   </Link>
                 </StaggerItem>
@@ -185,17 +177,17 @@ export function ServicesContent() {
           </div>
 
           {/* Feature highlights strip */}
-          <StaggerContainer className="mt-16 sm:mt-20 grid gap-6 rounded-3xl border border-border/80 bg-card p-6 sm:p-8 sm:grid-cols-2 lg:grid-cols-4 shadow-sm">
+          <StaggerContainer className="mt-12 sm:mt-16 md:mt-20 grid gap-4 sm:gap-6 rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-4 sm:p-6 lg:p-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 shadow-sm">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (
                 <StaggerItem key={feature.title}>
-                  <div className="text-center">
-                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                      <Icon className="h-6 w-6" />
+                  <div className="text-center p-2 sm:p-0">
+                    <div className="mx-auto mb-3 sm:mb-4 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                      <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
-                    <h3 className="font-bold text-foreground">{feature.title}</h3>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
+                    <h3 className="font-bold text-sm sm:text-base text-foreground">{feature.title}</h3>
+                    <p className="mt-1 sm:mt-1.5 text-xs sm:text-sm text-muted-foreground">
                       {feature.description}
                     </p>
                   </div>
@@ -207,34 +199,34 @@ export function ServicesContent() {
       </section>
 
       {/* Equipment & Materials Inventory Section */}
-      <section className="py-16 sm:py-24">
+      <section className="py-12 sm:py-20 md:py-24">
         <Container>
           <EquipmentInventory showTitle={true} />
         </Container>
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-muted/30 py-16 sm:py-24">
+      <section className="bg-muted/30 py-12 sm:py-20 md:py-24">
         <Container>
           <AnimateInView className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-extrabold sm:text-4xl tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">
               {t.servicesPage.whyTitle}
             </h2>
-            <p className="mt-3 text-muted-foreground">
+            <p className="mt-3 text-sm sm:text-base text-muted-foreground">
               {t.servicesPage.whySubtitle}
             </p>
           </AnimateInView>
 
-          <StaggerContainer className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <StaggerContainer className="mt-10 sm:mt-12 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((service) => {
               const Icon = service.icon;
               return (
                 <StaggerItem key={service.slug}>
-                  <div className="h-full rounded-2xl border border-border/80 bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-lg">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <Icon className="h-6 w-6" />
+                  <div className="h-full rounded-2xl border border-border/80 bg-card p-5 sm:p-6 transition-all hover:-translate-y-1 hover:shadow-lg">
+                    <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
-                    <h3 className="mt-4 font-bold text-foreground">{service.title}</h3>
+                    <h3 className="mt-3.5 sm:mt-4 text-base sm:text-lg font-bold text-foreground">{service.title}</h3>
                     <ul className="mt-3 space-y-2">
                       {service.features.slice(0, 4).map((feature) => (
                         <li
@@ -255,35 +247,35 @@ export function ServicesContent() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24">
+      <section className="py-12 sm:py-20 md:py-24">
         <Container>
           <AnimateInView>
-            <div className="relative overflow-hidden rounded-3xl bg-primary px-8 py-16 text-center md:px-12 shadow-2xl">
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-primary px-5 py-12 sm:px-8 sm:py-16 md:px-12 text-center shadow-2xl">
               <div className="absolute top-0 left-0 right-0 h-1 flex">
                 <div className="flex-1 bg-[var(--ethiopian-green)]" />
                 <div className="flex-1 bg-[var(--ethiopian-yellow)]" />
                 <div className="flex-1 bg-[var(--ethiopian-red)]" />
               </div>
               <div className="relative z-10">
-                <h2 className="text-3xl font-extrabold text-white md:text-4xl">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">
                   {t.servicesPage.ctaTitle}
                 </h2>
-                <p className="mx-auto mt-4 max-w-xl text-base text-primary-foreground/90 leading-relaxed">
+                <p className="mx-auto mt-3 sm:mt-4 max-w-xl text-sm sm:text-base text-primary-foreground/90 leading-relaxed">
                   {t.servicesPage.ctaText}
                 </p>
-                <div className="mt-8 flex flex-wrap justify-center gap-4">
+                <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-full sm:w-auto">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-bold text-primary shadow-lg transition-all hover:bg-white/90 hover:scale-105"
+                    className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-primary shadow-lg transition-all hover:bg-white/90 hover:scale-105"
                   >
-                    {t.servicesPage.getQuote}
+                    <span>{t.servicesPage.getQuote}</span>
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 rounded-full border-2 border-white/40 px-8 py-4 font-bold text-white transition-all hover:bg-white/10"
+                    className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border-2 border-white/40 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white transition-all hover:bg-white/10"
                   >
-                    {t.servicesPage.contactUs}
+                    <span>{t.servicesPage.contactUs}</span>
                   </Link>
                 </div>
               </div>

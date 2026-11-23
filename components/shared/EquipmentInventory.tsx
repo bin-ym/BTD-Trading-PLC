@@ -110,7 +110,7 @@ export function EquipmentInventory({
       )}
 
       {/* Category Filter Tabs */}
-      <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
+      <div className="mb-6 sm:mb-8 flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 sm:pb-0 sm:flex-wrap sm:justify-center scrollbar-none">
         {categories.map((cat) => {
           const Icon = cat.icon;
           const isActive = activeCategory === cat.id;
@@ -118,7 +118,7 @@ export function EquipmentInventory({
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs sm:text-sm font-medium transition-all ${
+              className={`shrink-0 inline-flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all ${
                 isActive
                   ? "bg-primary text-primary-foreground shadow-md shadow-primary/20 scale-105"
                   : "border border-border/80 bg-card hover:bg-muted text-muted-foreground hover:text-foreground"
@@ -134,7 +134,7 @@ export function EquipmentInventory({
       {/* Equipment Cards Grid */}
       <motion.div
         layout
-        className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
       >
         <AnimatePresence>
           {filteredItems.map((item, index) => {

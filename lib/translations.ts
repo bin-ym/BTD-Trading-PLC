@@ -34,7 +34,7 @@ export const translations = {
       badge: "About BTD Trading",
       title: "Your Trusted Ethiopian Cleaning Partner",
       description:
-        "BTD Trading PLC is an Ethiopian company providing professional cleaning and facility support services across Addis Ababa. Located in Megenagna, Amecha, we deploy 40+ dedicated staff members guided by on-site shift leaders with 1–2 years of practical field experience delivering spotless, polished spaces.",
+        "BTD Trading PLC is an Ethiopian company providing professional cleaning and facility support services across Addis Ababa. Located in Megenagna, Amecha, we deploy 40+ dedicated staff members guided by on-site shift leaders with 2 years of practical field experience delivering spotless, polished spaces.",
       years: "Field Experience",
       yearsVal: "2 years",
       projectsCompleted: "Projects Completed",
@@ -92,7 +92,7 @@ export const translations = {
         "We combine expertise, reliability, and attention to detail to deliver exceptional cleaning services",
       experiencedTeam: "Experienced Team",
       experiencedTeamDesc:
-        "Our 40+ trained professionals and dedicated shift leaders bring 1–2 years of practical commercial field experience.",
+        "Our 40+ trained professionals and dedicated shift leaders bring 2 years of practical commercial field experience.",
       modernEquipment: "Modern Equipment",
       modernEquipmentDesc:
         "We utilize 12 specialized equipment categories including buffing machines, industrial vacuums, squeegees, and certified chemicals.",
@@ -194,7 +194,7 @@ export const translations = {
       whoWeAre: {
         label: "Who We Are",
         title: "Clean, Safe & Productive Environments",
-        p1: "BTD Trading PLC (ቢቲዲ ትሬዲንግ ኃ.የተ. የግል. ማህበር) is a Private Limited Company based in Megenagna, Amecha, Addis Ababa. We deploy 40+ dedicated staff members managed by on-site shift leaders with 1–2 years of practical field experience. We provide flexible long-term and short-term cleaning contracts for a wide range of facilities — with a strong focus on hygiene, safety, professionalism, reliability, and customer satisfaction.",
+        p1: "BTD Trading PLC (ቢቲዲ ትሬዲንግ ኃ.የተ. የግል. ማህበር) is a Private Limited Company based in Megenagna, Amecha, Addis Ababa. We deploy 40+ dedicated staff members managed by on-site shift leaders with 2 years of practical field experience. We provide flexible long-term and short-term cleaning contracts for a wide range of facilities — with a strong focus on hygiene, safety, professionalism, reliability, and customer satisfaction.",
         p2: "Our goal is to create clean, safe, hygienic, and productive environments for every client we serve.",
       },
       focus: {
@@ -310,7 +310,7 @@ export const translations = {
       },
       stats: {
         experience: "Field Experience",
-        experienceValue: "1–2 Years",
+        experienceValue: "2 Years",
         team: "Dedicated Staff Members",
         teamValue: "40+ Staff",
         contracts: "Contract Terms",
@@ -819,7 +819,7 @@ export const translations = {
       available: "24/7 ዝግጁ",
       projects: "የተጠናቀቁ ፕሮጀክቶች",
       satisfaction: "የደንበኛ እርካታ",
-      statExperienceValue: "1–2 ዓመት",
+      statExperienceValue: "2 ዓመት",
       statExperienceLabel: "የተግባር ልምድ",
       statTeamValue: "40+",
       statTeamLabel: "ቁርጠኛ ሠራተኞች",
@@ -833,9 +833,9 @@ export const translations = {
       badge: "ስለ ቢቲዲ ትሬዲንግ",
       title: "የታመነ የጽዳት አጋርዎ",
       description:
-        "ቢቲዲ ትሬዲንግ በአዲስ አበባ ውስጥ ሙያዊ የጽዳት እና የተቋማት ድጋፍ አገልግሎቶችን የሚሰጥ ተለዋዋጭ የኢትዮጵያ ኩባንያ ነው። በመገናኛ አሜጫ የሚገኝ ሲሆን፣ 1–2 ዓመታት የተግባር ልምድ ባላቸው 40+ ቁርጠኛ ሰራተኞች እና በቦታው በሚመሩ የፈረቃ መሪዎች ንጹህ እና ብሩህ የስራ አካባቢዎችን እንፈጥራለን።",
+        "ቢቲዲ ትሬዲንግ በአዲስ አበባ ውስጥ ሙያዊ የጽዳት እና የተቋማት ድጋፍ አገልግሎቶችን የሚሰጥ ተለዋዋጭ የኢትዮጵያ ኩባንያ ነው። በመገናኛ አሜጫ የሚገኝ ሲሆን፣ 2 ዓመት የተግባር ልምድ ባላቸው 40+ ቁርጠኛ ሰራተኞች እና በቦታው በሚመሩ የፈረቃ መሪዎች ንጹህ እና ብሩህ የስራ አካባቢዎችን እንፈጥራለን።",
       years: "የተግባር ልምድ",
-      yearsVal: "1–2 ዓመት",
+      yearsVal: "2 ዓመት",
       projectsCompleted: "የተጠናቀቁ ፕሮጀክቶች",
       projectsVal: "35+",
       satisfaction: "የደንበኛ እርካታ",
@@ -889,7 +889,7 @@ export const translations = {
         "ልዩ የጽዳት አገልግሎት ለማቅረብ እውቀትን፣ አስተማማኝነትን እና ዝርዝር ትኩረትን እናቀላቅላለን",
       experiencedTeam: "ልምድ ያለው ቡድን",
       experiencedTeamDesc:
-        "40+ የሰለጠኑ ሰራተኞቻችን እና የፈረቃ መሪዎቻችን 1–2 ዓመታት የተግባር የሜዳ ላይ ልምድ አላቸው።",
+        "40+ የሰለጠኑ ሰራተኞቻችን እና የፈረቃ መሪዎቻችን 2 ዓመት የተግባር የሜዳ ላይ ልምድ አላቸው።",
       modernEquipment: "ዘመናዊ መሣሪያዎች",
       modernEquipmentDesc:
         "የወለል ማብሪያ ማሽኖች፣ ቫክዩም ክሊነሮች፣ ስኩዊጂ እና የተረጋገጡ ኬሚካሎችን ጨምሮ 12 ልዩ የመሣሪያ ምድቦችን እንጠቀማለን።",
@@ -983,7 +983,7 @@ export const translations = {
       whoWeAre: {
         label: "እኛ ማን ነን",
         title: "ንጹህ፣ ደህንነቱ የተጠበቀ እና ምቹ የስራ አካባቢዎች",
-        p1: "ቢቲዲ ትሬዲንግ ኃ.የተ. የግል. ማህበር በመገናኛ አሜጫ፣ አዲስ አበባ የሚገኝ ኃላፊነቱ የተወሰነ የግል ማህበር ነው። 1–2 ዓመታት የተግባር ልምድ ባላቸው 40+ ቁርጠኛ ሰራተኞች እና በቦታው በሚመሩ የፈረቃ መሪዎች የታገዘ ሲሆን፤ ለተለያዩ ተቋማት ተለዋዋጭ የረጅም እና የአጭር ጊዜ አገልግሎት ይሰጣል።",
+        p1: "ቢቲዲ ትሬዲንግ ኃ.የተ. የግል. ማህበር በመገናኛ አሜጫ፣ አዲስ አበባ የሚገኝ ኃላፊነቱ የተወሰነ የግል ማህበር ነው። 2 ዓመት የተግባር ልምድ ባላቸው 40+ ቁርጠኛ ሰራተኞች እና በቦታው በሚመሩ የፈረቃ መሪዎች የታገዘ ሲሆን፤ ለተለያዩ ተቋማት ተለዋዋጭ የረጅም እና የአጭር ጊዜ አገልግሎት ይሰጣል።",
         p2: "ግቡ ለምናገለግላቸው እያንዳንዱ ደንበኛ ንጹህ፣ ደህንነቱ የተጠበቀ እና ምቹ አካባቢ መፍጠር ነው።",
       },
       focus: {
@@ -1079,7 +1079,7 @@ export const translations = {
       },
       stats: {
         experience: "የተግባር ልምድ",
-        experienceValue: "1–2 ዓመት",
+        experienceValue: "2 ዓመት",
         team: "ቁርጠኛ ሠራተኞች",
         teamValue: "40+ ሠራተኞች",
         contracts: "የውል ስምምነት",

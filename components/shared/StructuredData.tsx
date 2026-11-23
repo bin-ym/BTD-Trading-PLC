@@ -1,6 +1,14 @@
 import Script from "next/script";
 
 export function StructuredData() {
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "BTD Trading PLC",
+    alternateName: ["ቢቲዲ ትሬዲንግ", "BTD Cleaning Services Addis Ababa", "BTD Trading"],
+    url: "https://www.btdtradingplc.com",
+  };
+
   const businessSchema = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "CleaningService"],
@@ -8,15 +16,22 @@ export function StructuredData() {
     alternateName: "ቢቲዲ ትሬዲንግ ኃ.የተ. የግል. ማህበር",
     description:
       "Professional cleaning and facility support services in Addis Ababa, Ethiopia. 40+ dedicated staff members, on-site shift leaders, flexible short- and long-term contracts, and high-shine polished finishes.",
-    url: "https://btdtrading.com",
-    logo: "https://btdtrading.com/images/logo.png",
-    image: "https://btdtrading.com/images/work/work-08.jpg",
+    url: "https://www.btdtradingplc.com",
+    logo: "https://www.btdtradingplc.com/images/logo.png",
+    image: [
+      "https://www.btdtradingplc.com/images/work/work-08.jpg",
+      "https://www.btdtradingplc.com/images/work/work-01.jpg",
+      "https://www.btdtradingplc.com/images/work/work-05.jpg",
+    ],
     telephone: [
       "+251 928-57-12-96",
       "+251 939-00-87-72",
       "+251 904-35-17-31",
     ],
     email: "info@btdtrading.com",
+    priceRange: "$$",
+    currenciesAccepted: "ETB",
+    paymentAccepted: "Cash, Bank Transfer, Telebirr, CBE",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Megenagna, Amecha",
@@ -25,9 +40,19 @@ export function StructuredData() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: "9.0222",
-      longitude: "38.7468",
+      latitude: "9.016333",
+      longitude: "38.805167",
     },
+    areaServed: [
+      {
+        "@type": "AdministrativeArea",
+        name: "Addis Ababa",
+      },
+      {
+        "@type": "Country",
+        name: "Ethiopia",
+      },
+    ],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -57,6 +82,7 @@ export function StructuredData() {
           itemOffered: {
             "@type": "Service",
             name: "Building Cleanup & Maintenance (with polished finishes)",
+            url: "https://www.btdtradingplc.com/services/building-cleaning",
             description:
               "Interior, exterior, and post-construction cleanup with high-shine floor scrubbing, buffing machine maintenance, and polished finishes.",
           },
@@ -65,16 +91,8 @@ export function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Service & Galas Support",
-            description:
-              "Specialized event, gala, and ceremonial gathering cleaning support with real-time on-site shift leadership and rapid spill management.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
             name: "Office Cleaning",
+            url: "https://www.btdtradingplc.com/services/office-cleaning",
             description:
               "Complete office cleaning for workspaces, boardrooms, floors, and common areas.",
           },
@@ -84,6 +102,7 @@ export function StructuredData() {
           itemOffered: {
             "@type": "Service",
             name: "Commercial Facility Cleaning",
+            url: "https://www.btdtradingplc.com/services/commercial-cleaning",
             description:
               "Specialized cleaning for shopping malls, stores, warehouses, and commercial complexes.",
           },
@@ -93,6 +112,7 @@ export function StructuredData() {
           itemOffered: {
             "@type": "Service",
             name: "Hospital & Healthcare Sanitation",
+            url: "https://www.btdtradingplc.com/services/hospital-cleaning",
             description:
               "Strict hospital-grade disinfection and sanitation services for healthcare facilities and clinics.",
           },
@@ -187,6 +207,11 @@ export function StructuredData() {
 
   return (
     <>
+      <Script
+        id="website-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <Script
         id="business-jsonld"
         type="application/ld+json"

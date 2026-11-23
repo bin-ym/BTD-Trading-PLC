@@ -10,7 +10,7 @@ Built with **Next.js 16 (Turbopack)**, **React 19**, **Tailwind CSS v4**, and **
 
 * **Hero Title / Branding:** Hero section with official brand identity, company logo (`/images/logo.png`), verified workers info badge, and location tags (Megenagna / Amecha, Addis Ababa).
 * **Core Statistics:**
-  * **Experience:** **1–2 years of field experience** in commercial and institutional facilities.
+  * **Experience:** **2 years of field experience** in commercial and institutional facilities.
   * **Team Members:** **40+ dedicated staff members** trained, vetted, and equipped with full PPE.
   * **Contract Terms:** **Flexible long-term and short-term service contracts** (1, 2, 3+ years or seasonal/one-time).
   * **Leadership Structure:** **Dedicated Shift Leaders managing on-site teams** directly on client premises.

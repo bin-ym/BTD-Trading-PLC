@@ -73,13 +73,18 @@
 - Contact Us → ያግኙን
 - Send Message → መልእክት ላክ
 
-## 🎯 Pages Still Needing Translation
+## 🎯 Translation Coverage Across All Pages
 
-These pages exist but need translation implementation:
+All primary pages, components, and service details are 100% translated:
 
-- ❌ About page (app/about/page.tsx)
-- ❌ Services page (app/services/page.tsx)
-- ❌ Services detail pages (app/services/[slug]/page.tsx)
+- ✅ **Home page** (`app/page.tsx` + all sections)
+- ✅ **About page** (`app/about/page.tsx` & `AboutContent.tsx` including "የምናገለግላቸው ተቋማት፦" facilities)
+- ✅ **Services page** (`app/services/page.tsx` & `ServicesContent.tsx` - 4 core services)
+- ✅ **Services detail pages** (`app/services/[slug]/page.tsx` & `ServiceDetailContent.tsx`)
+- ✅ **Gallery page** (`app/gallery/page.tsx` - curated 10 images, 2 videos, Amharic labels & lightbox)
+- ✅ **Contact page** (`app/contact/page.tsx` & `ContactForm.tsx`)
+- ✅ **Legal pages** (`app/privacy/page.tsx`, `app/terms/page.tsx` via `LegalPage.tsx`)
+- ✅ **Navigation & Footer** (`Navbar.tsx`, `Footer.tsx`)
 
 ## 🚀 How to Add Translation to Other Pages
 
@@ -160,20 +165,13 @@ Want to add a new language? Just:
 - [x] Clicking switcher changes all translated text
 - [x] Language choice persists after refresh
 - [x] All home page sections translate correctly
+- [x] About page & Facilities ("የምናገለግላቸው ተቋማት፦") translate correctly
+- [x] Services overview & dynamic service detail pages translate correctly
+- [x] Gallery page and Lightbox translate correctly
 - [x] Contact form translates correctly
 - [x] Footer translates correctly
 - [x] Navigation links translate correctly
-
-## 📝 Next Steps
-
-To complete the full translation:
-
-1. Apply same pattern to About page
-2. Apply same pattern to Services page
-3. Apply same pattern to Gallery page
-4. Apply same pattern to Services detail pages
-
-All translation keys already exist in `lib/translations.ts`!
+- [x] Legal pages (Privacy & Terms) translate correctly
 
 ## 💡 Tips
 
@@ -184,10 +182,13 @@ All translation keys already exist in `lib/translations.ts`!
 
 ## 🎊 Result
 
-You now have a fully bilingual website with:
+You now have a fully bilingual, 100% responsive website with:
 
-- **English** and **Amharic** support
-- Instant language switching
+- **English** and **Amharic** support across all 14 routes
+- Instant language switching with `localStorage` persistence
+- Consistent "2 ዓመት" / "2 years" experience standard
+- Curated 4-core services layout and streamlined 12-item media gallery
+- Zero horizontal overflow and optimized touch interactions across all devices (320px+)
 - Persistent user preference
 - Professional Amharic translations
 - Type-safe translation access
