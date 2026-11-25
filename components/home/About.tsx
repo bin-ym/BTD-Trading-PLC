@@ -56,22 +56,26 @@ export function About() {
                 className="absolute bottom-2.5 right-2.5 sm:bottom-4 sm:right-4 max-w-[92%] sm:max-w-none rounded-xl sm:rounded-2xl border border-border/80 bg-background/95 p-3 sm:p-4 shadow-xl backdrop-blur-md"
               >
                 <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="flex h-9 w-9 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Users className="h-5 w-5 sm:h-6 sm:w-6" />
+                  <div className="relative flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-primary/20 bg-white p-1 shadow-xs">
+                    <Image
+                      src="/images/logo.png"
+                      alt="BTD Trading PLC Logo"
+                      width={48}
+                      height={48}
+                      className="h-full w-full object-contain"
+                    />
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
                       <p className="text-xs sm:text-sm font-bold text-foreground truncate">
-                        {language === "am"
-                          ? "40+ ቁርጠኛ ሠራተኞች"
-                          : "40+ Dedicated Staff"}
+                        BTD Trading PLC
                       </p>
                       <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-primary" />
                     </div>
                     <p className="text-[10px] sm:text-xs text-muted-foreground truncate">
                       {language === "am"
-                        ? "በቦታው የሚገኙ የፈረቃ መሪዎች"
-                        : "Led by On-Site Shift Leaders"}
+                        ? "40+ ሠራተኞች • የፈረቃ መሪዎች"
+                        : "40+ Dedicated Staff • On-Site Leaders"}
                     </p>
                   </div>
                 </div>

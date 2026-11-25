@@ -133,6 +133,21 @@ export function ServiceDetailContent({ slug }: { slug: ServiceKey }) {
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                {/* Brand watermark badge */}
+                <div className="absolute top-3 right-3 sm:top-5 sm:right-5 flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-3 py-1.5 backdrop-blur-md">
+                  <div className="relative h-5 w-5 overflow-hidden rounded-full bg-white p-0.5">
+                    <Image
+                      src="/images/logo.png"
+                      alt="BTD Trading PLC Logo"
+                      width={20}
+                      height={20}
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                  <span className="text-[11px] sm:text-xs font-semibold text-white">
+                    BTD Trading PLC
+                  </span>
+                </div>
                 <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6">
                   <div
                     className={`flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-xl sm:rounded-2xl ${meta.color} text-white shadow-lg`}

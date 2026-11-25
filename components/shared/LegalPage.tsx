@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -28,10 +29,27 @@ export function LegalPage({ kind }: { kind: LegalPageKind }) {
 
         <Container className="relative">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-block rounded-full bg-primary/10 px-3.5 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-medium text-primary">
-              {page.badge}
-            </span>
-            <h1 className="mt-4 sm:mt-6 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+            {/* Brand Emblem */}
+            <div className="mx-auto mb-3.5 inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-background/80 px-3.5 py-1.5 shadow-xs backdrop-blur-md">
+              <div className="relative flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-0.5 shadow-inner">
+                <Image
+                  src="/images/logo.png"
+                  alt="BTD Trading PLC Logo"
+                  width={28}
+                  height={28}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <span className="text-xs sm:text-sm font-bold tracking-tight text-foreground">
+                BTD Trading PLC
+              </span>
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+              <span className="text-[11px] sm:text-xs text-muted-foreground">
+                {page.badge}
+              </span>
+            </div>
+
+            <h1 className="mt-2 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
               {page.title}
             </h1>
             <p className="mt-2 text-xs sm:text-sm text-muted-foreground">

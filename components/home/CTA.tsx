@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -46,11 +47,22 @@ export function CTA() {
           transition={{ duration: 0.8 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <div className="mb-4 sm:mb-6 flex items-center justify-center gap-2">
-            <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-white/80" />
-            <span className="text-xs sm:text-sm font-medium text-white/80">
-              {t.cta.badge}
-            </span>
+          <div className="mb-4 sm:mb-6 flex flex-col items-center justify-center gap-3">
+            <div className="relative flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-1.5 shadow-lg">
+              <Image
+                src="/images/logo.png"
+                alt="BTD Trading PLC Logo"
+                width={56}
+                height={56}
+                className="h-full w-full object-contain"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-white/80" />
+              <span className="text-xs sm:text-sm font-medium text-white/90">
+                {t.cta.badge}
+              </span>
+            </div>
           </div>
 
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
