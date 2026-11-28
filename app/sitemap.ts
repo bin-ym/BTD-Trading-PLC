@@ -1,73 +1,60 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.btdtradingplc.com";
-  const lastModified = new Date();
-
   return [
     {
-      url: baseUrl,
-      lastModified,
+      url: SITE_URL,
       changeFrequency: "weekly",
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/services`,
-      lastModified,
+      url: `${SITE_URL}/services`,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/services/office-cleaning`,
-      lastModified,
+      url: `${SITE_URL}/services/office-cleaning`,
       changeFrequency: "monthly",
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/services/building-cleaning`,
-      lastModified,
+      url: `${SITE_URL}/services/building-cleaning`,
       changeFrequency: "monthly",
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/services/commercial-cleaning`,
-      lastModified,
+      url: `${SITE_URL}/services/commercial-cleaning`,
       changeFrequency: "monthly",
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/services/hospital-cleaning`,
-      lastModified,
+      url: `${SITE_URL}/services/hospital-cleaning`,
       changeFrequency: "monthly",
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/about`,
-      lastModified,
+      url: `${SITE_URL}/about`,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/gallery`,
-      lastModified,
+      url: `${SITE_URL}/gallery`,
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/contact`,
-      lastModified,
+      url: `${SITE_URL}/contact`,
       changeFrequency: "monthly",
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/privacy`,
-      lastModified,
+      url: `${SITE_URL}/privacy`,
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/terms`,
-      lastModified,
+      url: `${SITE_URL}/terms`,
       changeFrequency: "yearly",
       priority: 0.3,
     },

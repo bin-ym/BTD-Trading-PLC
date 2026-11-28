@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+  buildServiceSchema,
+  type OgImageSpec,
+} from "@/lib/seo";
 import { ServiceDetailContent } from "./ServiceDetailContent";
 
 type ServiceSlug =
@@ -19,14 +26,20 @@ const slugToKey = {
 
 interface ServiceMetaInfo {
   title: string;
+  breadcrumbLabel: string;
+  serviceName: string;
+  serviceType: string;
   description: string;
   keywords: string[];
-  image: string;
+  image: OgImageSpec;
 }
 
 const metadataBySlug: Record<ServiceSlug, ServiceMetaInfo> = {
   "building-cleaning": {
-    title: "Building Cleanup & Maintenance (with Polished Finishes) | Addis Ababa",
+    title: "Building Cleaning & Polishing Services in Addis Ababa",
+    breadcrumbLabel: "Building Cleaning",
+    serviceName: "Building Cleanup & Maintenance (with polished finishes)",
+    serviceType: "Building Cleaning Service",
     description:
       "Comprehensive building cleanup and maintenance services with rotary floor scrubbing, buffing machines, squeegees, and high-shine polished finishes in Addis Ababa, Ethiopia.",
     keywords: [
@@ -36,10 +49,18 @@ const metadataBySlug: Record<ServiceSlug, ServiceMetaInfo> = {
       "Floor Scrubbing Machine Ethiopia",
       "High Shine Floor Polish Addis Ababa",
     ],
-    image: "/images/work/work-05.jpg",
+    image: {
+      url: "/images/work/work-11.jpg",
+      width: 1280,
+      height: 960,
+      alt: "Building Cleanup and Polished Floor Maintenance in Addis Ababa",
+    },
   },
   "office-cleaning": {
-    title: "Professional Office Cleaning Services | Addis Ababa, Ethiopia",
+    title: "Office Cleaning Services in Addis Ababa",
+    breadcrumbLabel: "Office Cleaning",
+    serviceName: "Office Cleaning",
+    serviceType: "Office Cleaning Service",
     description:
       "Complete office cleaning services for workspaces, meeting rooms, executive boardrooms, and restrooms in Addis Ababa, Ethiopia. Daily and contract-based janitorial services.",
     keywords: [
@@ -48,31 +69,52 @@ const metadataBySlug: Record<ServiceSlug, ServiceMetaInfo> = {
       "Workplace Sanitation Addis Ababa",
       "Office Cleaner Contract Ethiopia",
     ],
-    image: "/images/work/work-01.jpg",
+    image: {
+      url: "/images/work/work-01.jpg",
+      width: 1280,
+      height: 960,
+      alt: "Corporate Office Cleaning Services in Addis Ababa",
+    },
   },
   "commercial-cleaning": {
-    title: "Commercial Facility & Mall Cleaning | Addis Ababa, Ethiopia",
+    title: "Commercial Cleaning Services in Addis Ababa",
+    breadcrumbLabel: "Commercial Cleaning",
+    serviceName: "Commercial Facility Cleaning",
+    serviceType: "Commercial Cleaning Service",
     description:
-      "Professional cleaning services for shopping malls, retail stores, warehouses, and commercial complexes in Ethiopia. Heavy-duty floor care and waste management.",
+      "Professional cleaning services for shopping malls, retail stores, warehouses, and commercial complexes in Addis Ababa, Ethiopia.",
     keywords: [
       "Commercial Cleaning Ethiopia",
       "Shopping Mall Cleaning Addis Ababa",
       "Warehouse Cleaning Addis Ababa",
       "Retail Facility Maintenance Ethiopia",
     ],
-    image: "/images/work/work-07.jpg",
+    image: {
+      url: "/images/work/work-07.jpg",
+      width: 1280,
+      height: 960,
+      alt: "Commercial Facility and Shopping Complex Cleaning in Addis Ababa",
+    },
   },
   "hospital-cleaning": {
-    title: "Hospital & Healthcare Sanitation Services | Addis Ababa, Ethiopia",
+    title: "Hospital & Healthcare Cleaning Services in Addis Ababa",
+    breadcrumbLabel: "Hospital Cleaning",
+    serviceName: "Hospital & Clinic Sanitation",
+    serviceType: "Healthcare Cleaning and Sanitation Service",
     description:
-      "Hospital-grade disinfection and strict medical sanitation services for healthcare facilities, clinics, and diagnostic laboratories across Ethiopia.",
+      "Hospital-grade disinfection and strict sanitation services for hospitals, clinics, and healthcare facilities in Addis Ababa, Ethiopia.",
     keywords: [
       "Hospital Cleaning Ethiopia",
       "Healthcare Sanitation Addis Ababa",
       "Clinic Disinfection Services Ethiopia",
       "Medical Cleaning Addis Ababa",
     ],
-    image: "/images/work/work-08.jpg",
+    image: {
+      url: "/images/work/work-08.jpg",
+      width: 960,
+      height: 1280,
+      alt: "Hospital and Healthcare Sanitation Services in Addis Ababa",
+    },
   },
 };
 
@@ -90,41 +132,18 @@ export async function generateMetadata({
 
   if (!meta) {
     return {
-      title: "Service Details | BTD Trading PLC",
+      title: "Service Details",
       description: "Professional cleaning services in Addis Ababa, Ethiopia.",
     };
   }
 
-  const canonicalUrl = `https://www.btdtradingplc.com/services/${slug}`;
-
-  return {
+  return buildPageMetadata({
     title: meta.title,
     description: meta.description,
+    path: `/services/${slug}`,
     keywords: meta.keywords,
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      title: `${meta.title} | BTD Trading PLC`,
-      description: meta.description,
-      url: canonicalUrl,
-      type: "website",
-      images: [
-        {
-          url: meta.image,
-          width: 1200,
-          height: 630,
-          alt: meta.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: meta.title,
-      description: meta.description,
-      images: [meta.image],
-    },
-  };
+    image: meta.image,
+  });
 }
 
 export default async function ServiceDetailPage({
@@ -134,13 +153,32 @@ export default async function ServiceDetailPage({
 }) {
   const { slug } = await params;
   const key = slugToKey[slug as ServiceSlug];
+  const meta = metadataBySlug[slug as ServiceSlug];
 
-  if (!key) {
+  if (!key || !meta) {
     notFound();
   }
 
+  const servicePath = `/services/${slug}`;
+
   return (
     <>
+      <JsonLd
+        data={buildServiceSchema({
+          name: meta.serviceName,
+          serviceType: meta.serviceType,
+          description: meta.description,
+          path: servicePath,
+          image: meta.image.url,
+        })}
+      />
+      <JsonLd
+        data={buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: meta.breadcrumbLabel, path: servicePath },
+        ])}
+      />
       <Navbar />
       <ServiceDetailContent slug={key} />
       <Footer />

@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbSchema, buildPageMetadata, SITE_NAME } from "@/lib/seo";
 import { ContactContent } from "./ContactContent";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Get a Free Cleaning Quote in Addis Ababa",
+export const metadata: Metadata = buildPageMetadata({
+  absoluteTitle: `Contact ${SITE_NAME} | Cleaning Services in Addis Ababa`,
   description:
-    "Contact BTD Trading PLC for professional commercial, office, building and healthcare cleaning services in Addis Ababa, Ethiopia. Located in Megenagna (Amecha). Call +251 928-57-12-96 or request a fast quote online.",
+    "Contact BTD Trading PLC for commercial, office, building, and hospital cleaning services in Addis Ababa, Ethiopia. Located in Megenagna, Amecha. Call +251 928-57-12-96 or request a quote.",
+  path: "/contact",
   keywords: [
     "Contact BTD Trading PLC",
     "Cleaning Services Quote Addis Ababa",
@@ -16,36 +19,23 @@ export const metadata: Metadata = {
     "Cleaning Company Contact Addis Ababa",
     "Ethiopian Cleaning Contact",
   ],
-  alternates: {
-    canonical: "https://www.btdtradingplc.com/contact",
+  image: {
+    url: "/images/work/work-01.jpg",
+    width: 1280,
+    height: 960,
+    alt: "Contact BTD Trading PLC in Addis Ababa, Ethiopia",
   },
-  openGraph: {
-    title: "Contact BTD Trading PLC | Cleaning Services in Addis Ababa",
-    description:
-      "Get in touch with BTD Trading PLC for expert cleaning and facility management in Addis Ababa, Ethiopia. Call +251 928-57-12-96 or request a consultation.",
-    url: "https://www.btdtradingplc.com/contact",
-    type: "website",
-    images: [
-      {
-        url: "/images/work/work-08.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Contact BTD Trading PLC - Addis Ababa, Ethiopia",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Contact BTD Trading PLC | Professional Cleaning in Addis Ababa",
-    description:
-      "Request a consultation or cleaning proposal from BTD Trading PLC in Addis Ababa, Ethiopia.",
-    images: ["/images/work/work-08.jpg"],
-  },
-};
+});
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ])}
+      />
       <Navbar />
       <ContactContent />
       <Footer />

@@ -2,7 +2,14 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { LanguageProvider } from "@/contexts/LanguageContext";
-import { StructuredData } from "@/components/shared/StructuredData";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  buildOrganizationSchema,
+  DEFAULT_OG_IMAGE,
+  LOGO_OG_IMAGE,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,14 +22,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const googleVerification =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim() || undefined;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.btdtradingplc.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "BTD Trading PLC - Professional Cleaning & Facility Services in Ethiopia",
-    template: "%s | BTD Trading PLC",
+    default: `${SITE_NAME} | Professional Cleaning Services in Addis Ababa`,
+    template: `%s | ${SITE_NAME}`,
   },
   description:
-    "BTD Trading PLC is a trusted Ethiopian company offering professional commercial cleaning, office maintenance, building cleanup with polished finishes, and healthcare sanitation in Addis Ababa, Ethiopia.",
+    "BTD Trading PLC provides professional cleaning and facility support services in Addis Ababa, Ethiopia, including office, building, commercial, and hospital cleaning.",
   keywords: [
     "Cleaning Services Ethiopia",
     "Office Cleaning Addis Ababa",
@@ -43,49 +53,33 @@ export const metadata: Metadata = {
     "ቢቲዲ ትሬዲንግ",
     "ቢቲዲ ትሬዲንግ ኃ/የተ/የግ/ማህበር",
   ],
-  authors: [{ name: "BTD Trading PLC", url: "https://www.btdtradingplc.com" }],
-  creator: "BTD Trading PLC",
-  publisher: "BTD Trading PLC",
-  applicationName: "BTD Trading PLC",
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  applicationName: SITE_NAME,
   category: "Business & Facility Services",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  alternates: {
-    canonical: "https://www.btdtradingplc.com",
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
     alternateLocale: ["am_ET"],
-    url: "https://www.btdtradingplc.com",
-    siteName: "BTD Trading PLC",
-    title: "BTD Trading PLC - Professional Cleaning & Facility Services in Ethiopia",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} | Professional Cleaning Services in Addis Ababa`,
     description:
-      "Trusted cleaning and facility support in Addis Ababa, Ethiopia. 40+ staff, high-shine floor polishing, hospital disinfection, and full office maintenance.",
-    images: [
-      {
-        url: "/images/work/work-08.jpg",
-        width: 1200,
-        height: 630,
-        alt: "BTD Trading PLC - Professional Cleaning Staff at Work in Addis Ababa",
-      },
-      {
-        url: "/images/logo.png",
-        width: 800,
-        height: 800,
-        alt: "BTD Trading PLC Logo",
-      },
-    ],
+      "BTD Trading PLC provides professional cleaning and facility support services in Addis Ababa, Ethiopia, backed by 40+ dedicated staff and on-site shift leaders.",
+    images: [DEFAULT_OG_IMAGE, LOGO_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BTD Trading PLC - Professional Cleaning & Facility Services in Ethiopia",
+    title: `${SITE_NAME} | Professional Cleaning Services in Addis Ababa`,
     description:
-      "Trusted commercial, office, building and healthcare cleaning services in Addis Ababa, Ethiopia. 40+ dedicated staff and modern equipment.",
-    images: ["/images/work/work-08.jpg"],
+      "Professional commercial, office, building, and hospital cleaning services in Addis Ababa, Ethiopia.",
+    images: [DEFAULT_OG_IMAGE.url],
   },
   robots: {
     index: true,
@@ -111,9 +105,13 @@ export const metadata: Metadata = {
       { url: "/images/logo.png" },
     ],
   },
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-  },
+  ...(googleVerification
+    ? {
+        verification: {
+          google: googleVerification,
+        },
+      }
+    : {}),
 };
 
 export default function RootLayout({
@@ -136,7 +134,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background text-foreground min-h-screen overflow-x-hidden antialiased">
-        <StructuredData />
+        <JsonLd data={buildOrganizationSchema()} />
         <LanguageProvider>
           <ThemeProvider>
             <div className="ethiopian-stripe-top" />

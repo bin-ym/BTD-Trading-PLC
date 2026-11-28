@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbSchema, buildPageMetadata } from "@/lib/seo";
 import { ServicesContent } from "./ServicesContent";
 
-export const metadata: Metadata = {
-  title: "Professional Cleaning Services in Addis Ababa",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Cleaning Services in Addis Ababa",
   description:
-    "Explore comprehensive cleaning services from BTD Trading PLC in Ethiopia: corporate office cleaning, building cleanup & maintenance with high-shine polish, commercial facilities, and hospital-grade disinfection.",
+    "Explore professional cleaning services from BTD Trading PLC in Addis Ababa, Ethiopia: office cleaning, building cleanup with polished finishes, commercial facilities, and hospital sanitation.",
+  path: "/services",
   keywords: [
     "Cleaning Services Addis Ababa",
     "Office Cleaning Services Ethiopia",
@@ -16,36 +19,23 @@ export const metadata: Metadata = {
     "Floor Polishing Services Addis Ababa",
     "Facility Management Addis Ababa",
   ],
-  alternates: {
-    canonical: "https://www.btdtradingplc.com/services",
+  image: {
+    url: "/images/work/work-11.jpg",
+    width: 1280,
+    height: 960,
+    alt: "BTD Trading PLC Commercial and Building Cleaning Services",
   },
-  openGraph: {
-    title: "Cleaning & Facility Services | BTD Trading PLC Ethiopia",
-    description:
-      "Reliable cleaning solutions tailored for offices, commercial centers, healthcare facilities, and multi-story buildings across Addis Ababa.",
-    url: "https://www.btdtradingplc.com/services",
-    type: "website",
-    images: [
-      {
-        url: "/images/work/work-05.jpg",
-        width: 1200,
-        height: 630,
-        alt: "BTD Trading PLC Commercial Cleaning Services",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Cleaning & Facility Services | BTD Trading PLC",
-    description:
-      "Commercial cleaning, office maintenance, floor buffing and hospital disinfection in Addis Ababa.",
-    images: ["/images/work/work-05.jpg"],
-  },
-};
+});
 
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        data={buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ])}
+      />
       <Navbar />
       <ServicesContent />
       <Footer />
