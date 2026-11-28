@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { LanguageProvider } from "@/contexts/LanguageContext";
-import { JsonLd } from "@/components/seo/JsonLd";
 import {
-  buildOrganizationSchema,
   DEFAULT_OG_IMAGE,
   LOGO_OG_IMAGE,
   SITE_NAME,
@@ -134,7 +132,6 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background text-foreground min-h-screen overflow-x-hidden antialiased">
-        <JsonLd data={buildOrganizationSchema()} />
         <LanguageProvider>
           <ThemeProvider>
             <div className="ethiopian-stripe-top" />

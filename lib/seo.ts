@@ -9,7 +9,7 @@ export const BUSINESS_INFO = {
   alternateName: SITE_ALTERNATE_NAME,
   url: SITE_URL,
   logo: `${SITE_URL}/images/logo.png`,
-  email: "info@btdtrading.com",
+  email: "info@btdtradingplc.com",
   telephone: [
     "+251 928-57-12-96",
     "+251 939-00-87-72",
@@ -19,10 +19,6 @@ export const BUSINESS_INFO = {
     streetAddress: "Megenagna, Amecha",
     addressLocality: "Addis Ababa",
     addressCountry: "ET",
-  },
-  geo: {
-    latitude: 9.016333,
-    longitude: 38.805167,
   },
 } as const;
 
@@ -99,25 +95,10 @@ export function buildPageMetadata({
   };
 }
 
-export function buildOrganizationSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${SITE_URL}/#organization`,
-    name: BUSINESS_INFO.name,
-    alternateName: BUSINESS_INFO.alternateName,
-    url: BUSINESS_INFO.url,
-    logo: BUSINESS_INFO.logo,
-    description:
-      "Professional cleaning and facility support company in Addis Ababa, Ethiopia.",
-    email: BUSINESS_INFO.email,
-    telephone: [...BUSINESS_INFO.telephone],
-    address: {
-      "@type": "PostalAddress",
-      ...BUSINESS_INFO.address,
-    },
-  };
-}
+// buildOrganizationSchema is intentionally removed.
+// LocalBusiness (a subtype of Organization) serves as the single canonical
+// business entity via @id "#localbusiness". WebSite.publisher and
+// Service.provider reference "#localbusiness" directly.
 
 export function buildWebSiteSchema() {
   return {
@@ -128,7 +109,7 @@ export function buildWebSiteSchema() {
     alternateName: ["ቢቲዲ ትሬዲንግ", "BTD Trading"],
     url: SITE_URL,
     publisher: {
-      "@id": `${SITE_URL}/#organization`,
+      "@id": `${SITE_URL}/#localbusiness`,
     },
   };
 }
@@ -156,21 +137,12 @@ export function buildLocalBusinessSchema() {
       "@type": "PostalAddress",
       ...BUSINESS_INFO.address,
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: BUSINESS_INFO.geo.latitude,
-      longitude: BUSINESS_INFO.geo.longitude,
+    // TODO: Add geo.latitude and geo.longitude once the office coordinates
+    // are confirmed by the business owner. Do not add unverified coordinates.
+    areaServed: {
+      "@type": "Country",
+      name: "Ethiopia",
     },
-    areaServed: [
-      {
-        "@type": "City",
-        name: "Addis Ababa",
-      },
-      {
-        "@type": "Country",
-        name: "Ethiopia",
-      },
-    ],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -257,14 +229,14 @@ export function buildServiceSchema({
     url: canonicalUrl(path),
     image: image.startsWith("http") ? image : `${SITE_URL}${image}`,
     provider: {
-      "@type": "Organization",
-      "@id": `${SITE_URL}/#organization`,
+      "@type": "LocalBusiness",
+      "@id": `${SITE_URL}/#localbusiness`,
       name: BUSINESS_INFO.name,
       url: BUSINESS_INFO.url,
     },
     areaServed: {
-      "@type": "City",
-      name: "Addis Ababa",
+      "@type": "Country",
+      name: "Ethiopia",
     },
   };
 }
